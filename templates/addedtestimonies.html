@@ -1,0 +1,56 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+ 
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+      filter: invert(80%);
+    }
+  
+</style>
+
+<body>
+   <!-- Testimonial Start -->
+   <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="text-center">
+            
+            <h2 class="mb-5">Our Aspirants Testimonies !</h2>
+        </div>
+        <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            {% for batch_num in range(0, testify|length, 3) %}
+            <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+              <div class="row">
+                {% for testimony in testify[batch_num:batch_num+3] %}
+                <div class="col-md-4" >
+                  <div class="testimonial-item text-center" style=" background-color: rgb(85, 137, 172);">
+                    <img class="border rounded-circle p-2 mx-auto mb-3" src="{{ url_for('testimonies_image', testimonies_id=testimony.id) }}" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0" style="color: white;">{{ testimony.name }}</h5>
+                    <div class="testimonial-text bg-light text-center p-4">
+                      <p class="mb-0">{{ testimony.description }}</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm"onclick="" style="margin-top: 2%; border-radius: 5px; background-color: rgb(26, 53, 26);"><a href="/edit/testimonies/{{testimony.id}}" style="color: white; text-decoration: none;">Update</button></a>
+                    <button class="btn btn-primary btn-sm"onclick="" style="margin-top: 2%; border-radius: 5px; background-color: rgb(26, 53, 26);"><a href="/delete/testimonies/{{testimony.id}}" style="color: white; text-decoration: none;">Delete/Remove</a></button>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        
+    </div>
+</div>
+</body>
+{% endblock %}

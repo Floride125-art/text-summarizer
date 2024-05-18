@@ -1,0 +1,83 @@
+{% extends 'coursedashboard.html' %}
+{% block contentfluid %}
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Feedback for {{ course_code }}</h1>
+</div>
+<center>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Feedback submitted
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ feedbacksCount }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+<div class="container">
+    <div class="row">
+        <h1><center>Submitted Feedback</center></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Student Name</th>
+                    <th>Roll Number</th>
+                    <th>Feedback Submitted</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if feedbacks %}
+                    {% for feedback in feedbacks %}
+                        <tr>
+                            <td>{{ feedback.id }}</td>
+                            <td>{{ feedback.name }}</td>
+                            <td>{{ feedback.rname }}</td>
+                            <td class="feedback-text">{{ feedback.feedback }}</td>
+                            <td>
+                                <a href="{{ url_for('view_individual_feedback', feedback_id=feedback.id, course_code=course_code) }}" class="btn btn-primary">Summarize</a>
+                               
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5"><p>No feedback found for this course.</p></td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    function truncateFeedback() {
+        const feedbackElements = document.querySelectorAll('.feedback-text');
+        feedbackElements.forEach(el => {
+            const fullText = el.textContent.trim();
+            const words = fullText.split(' ');
+            if (words.length > 50) {
+                const truncatedText = words.slice(0, 50).join(' ') + '...';
+                el.textContent = truncatedText;
+                const readMoreLink = document.createElement('a');
+                readMoreLink.href = '#';
+                readMoreLink.textContent = ' Read more';
+                readMoreLink.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    el.textContent = fullText;
+                });
+                el.appendChild(readMoreLink);
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', truncateFeedback);
+</script>
+{% endblock %}

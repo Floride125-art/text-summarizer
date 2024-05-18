@@ -1,0 +1,95 @@
+{% extends 'ahabanza.html' %}
+
+{% block contentfluid %}
+<style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+  
+   input, select {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+   }
+
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the button */
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+</style>
+
+<div>
+    <h1 style="align-items: center; text-align: center; color: black;">Add Courses</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form action="/courseadd" method="POST" enctype="multipart/form-data">
+        <label for="course">Course Name:</label>
+        <input type="text" id="course" name="course" required>
+        <label for="code">Course Code:</label>
+        <input type="text" id="code" name="code" required>
+        <label for="semester">Semester:</label>
+        <select id="semester" name="semester">
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+        </select>
+        <label for="major">Major:</label>
+        <select id="major" name="major">
+            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+            <option value="Information Communication Technology">Information Communication Technology</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="Petroleum Engineering">Petroleum Engineering</option>
+            <option value="Automobile Engineering">Automobile Engineering</option>
+            <option value="School of Liberal Studies">School of Liberal Studies</option>
+            <option value=" Electronics & Communication Engineering"> Electronics & Communication Engineering</option>  
+        </select>
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="School of Technology">School of Technology</option>
+            <option value="School of Liberal Studies">School of Liberal Studies</option>
+            <option value="School of Management">School of Management</option>
+            <option value="School of Petroleum Technology">School of Petroleum Technology</option> 
+        </select>
+        <br>
+        <button type="submit">Add Course</button>
+        <br></br>
+    </form> 
+</div>
+{% endblock %}

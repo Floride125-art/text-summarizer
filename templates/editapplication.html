@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% set active_page = "profile" %}
+{% block content %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item text-white h3 font-secondary nasted">My Profile</li>
+          </ul>
+          <p class="text-lighten mb-0">This is section where you will be able to edit some of the information you have submitted!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<div tabindex="-1" role="dialog" >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Edit Application details</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form  class="row" action = "/edit/application/{{id}}" method="post" enctype="multipart/form-data">
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3" id="name" name="name" value="{{post.name}}">
+                        </div>
+                        <div class="col-12">
+                            <input type="date" class="form-control mb-3" id="date_of_birth" name="date_of_birth" value="{{post.date_of_birth}}">
+                        </div>
+                        <div class="col-12">
+                            <input type="phone" class="form-control mb-3" id="pnumber" name="pnumber" value="{{post.pnumber}}" >
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control mb-3" id="email" name="email" value="{{post.email}}">
+                        </div>
+                        <div class="col-12">
+                            <select id="statustype" name="statustype" class="form-control mb-3" required>
+                                <option value="" disabled>Select status type</option>
+                                <option value="student" {% if post.statustype == 'student' %}selected{% endif %}>Student</option>
+                                <option value="agent" {% if post.statustype == 'agent' %}selected{% endif %}>Agent</option>
+                            </select><br>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3" id="address"  name= "address" value="{{post.address}}">
+                        </div>
+                        <div class="col-12">
+                            <select id="program" name="program" class="form-control mb-3" required>
+                                <option value="" disabled selected>Program type</option>
+                                <option value="short-courses" {% if post.program == 'short-courses' %}selected{% endif %}>Short courses</option>
+                                <option value="featured-courses" {% if post.program == 'featured-course' %}selected{% endif %}>Featured courses</option>
+                                <option value="undergraduate" {% if post.program == 'undergraduate' %}selected{% endif %}>Undergraduate</option>
+                                <option value="diploma" {% if post.program == 'diploma' %}selected{% endif %}>Diploma</option>
+                                <option value="masters-degree" {% if post.program == 'masters-degree' %}selected{% endif %}>Masters degree</option>
+                                <option value="postgraduate" {% if post.program == 'postgraduate' %}selected{% endif %}>Postgraduate</option>
+                                
+                            </select><br>
+                          
+                        </div>
+                        <div class="col-12">
+                            <select id="education" name="education" class="form-control mb-3" required>
+                                <option value="" disabled selected>Highest level of Education</option>
+                                <option value="short-courses" {% if post.education == 'short-courses' %}selected{% endif %}>High School</option>
+            
+                                <option value="undergraduate" {% if post.education == 'undergraduate' %}selected{% endif %}>Undergraduate</option>
+                                <option value="diploma" {% if post.education == 'diploma' %}selected{% endif %}>Diploma</option>
+                                <option value="masters-degree" {% if post.education == 'masters-degree' %}selected{% endif %}>Masters degree</option>
+                                <option value="postgraduate" {% if post.education == 'postgraduate' %}selected{% endif %}>Postgraduate</option>
+                                
+                            </select><br>
+
+                        </div>
+                        <div class="col-12">
+                            <select id="gender" name="gender" value="{{post.gender}}" class="form-control mb-3">
+                                <option value="" disabled>Gender</option>
+                                <option value="student" {% if post.gender == 'male' %}selected{% endif %}>Male</option>
+                                <option value="agent" {% if post.gender == 'female' %}selected{% endif %}>Female</option>
+                                
+                              </select><br>
+                        </div>
+                        <div class="col-12" class="form-control mb-3">
+                            <label>Olevel certificate: {{post.oleveldoc_filename}}</label>
+                            <input type="file" id="oleveldoc" name="oleveldoc" accept=".pdf,.doc,.docx" class="form-control mb-3" >
+                        </div>
+                        <div class="col-12">
+                            <label>Olevel certificate: {{post.aleveldoc_filename}}</label>
+                            <input type="file" id="aleveldoc" name="aleveldoc" accept=".pdf,.doc,.docx" class="form-control mb-3"  />
+                        </div>
+                        <div class="col-12">
+                            <label>Olevel certificate: {{post.bachelor_filename}}</label>
+                            <input type="file" id="bachelor" name="bachelor" accept=".pdf,.doc,.docx" class="form-control mb-3"/>
+                        </div>
+                        <div class="col-12">
+                         <label>Olevel certificate: {{post.masters_filename}}</label>
+                         <input type="file" id="masters" name="masters" accept=".pdf,.doc,.docx" class="form-control mb-3" />
+                        </div>
+                        <div class="col-12">
+                            <label>Olevel certificate: {{post.myid_filename}}</label>
+                            <input type="file" id="myid" name="myid" accept=".pdf,.doc,.docx" class="form-control mb-3" />
+                        </div>
+                        <div class="col-12">
+                            <label>Olevel certificate: {{post.mypassport_filename}}</label>
+                            <input type="file" id="mypassport" name="mypassport" accept=".pdf,.doc,.docx" class="form-control mb-3" />
+                        </div>
+                        <div class="col-12">
+                            <label>Olevel certificate: {{post.mycv_filename}}</label>
+                            <input type="file" id="mycv" name="mycv" accept=".pdf,.doc,.docx" class="form-control mb-3" />
+                        </div>
+                       
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+ 
+  {% endblock  %}

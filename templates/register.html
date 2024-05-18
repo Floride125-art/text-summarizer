@@ -1,0 +1,137 @@
+{% extends 'base1.html' %}
+{% set active_page = "register" %}
+
+ {% block body %}
+ <style>
+   body{
+    background-color: #1A2933;
+  }
+.form-container {
+  background-color: #1A2933;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+#moncontainer{
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.password-container {
+  position: relative;
+}
+
+#password-toggle {
+ 
+  background: none;
+  margin-left: -8%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+
+
+</style>
+<body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/mytyping.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8" style="margin-top: 10%;">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Register</li>
+          </ul>
+          <p class="text-lighten mb-0">This page is for registering your email and receive login credentials such as email and password</p>
+         
+        </div>
+      </div>
+    </div>
+  </section>
+  <center><div class="container" id="moncontainer">
+    <div class="form-container" >
+      <form id="login-form" class="form" action="/register" method="post">
+        {{ form.hidden_tag() }}
+        
+ <center> <h2 style="color:white" class="logheader">Register</h2></center>
+ <center> <p style="color:white" class="logheader">Enter your email to receive login credentials</p></center>
+ <center> <p class="text-lighten mb-0">N.B: Only authorized Lecturer are allowed to register and get login credentials in order to login</p></center>
+ <center>  <p style="color:white" class="myinput" id="">
+        {{ form.email.label}} :<br>
+        {{ form.email(size=20,placeholder="email@gmail.com") }}<br>
+        {% for error in form.email.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p></center>
+  <center><p class="button" style="font-size: 20px" id="register-form" class="button" style="font-size: 25px;color:black bold;">{{ form.submit()}}</p></center>
+        <div class="signup-section">
+          <center><p>Arleady registered? <a href="/injira">Login</a></p></center>
+        </div>
+      </form>
+    </div>
+  </div></center>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const registerForm = document.getElementById("register-form");
+
+        registerForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById("email");
+            const emailValue = emailInput.value.trim();
+            if (!validateEmail(emailValue)) {
+                showError("email-error", "Please enter a valid email address.");
+                return;
+            }
+            const phoneInput = document.getElementById("number");
+            const phoneValue = phoneInput.value.trim();
+            if (!validatePhoneNumber(phoneValue)) {
+                showError("number-error", "Please enter a valid phone number.");
+                return;
+            }
+            registerForm.submit();
+        });
+
+        function validateEmail(email) {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email);
+        }
+
+        function validatePhoneNumber(phone) {
+            const phonePattern = /^\d{10}$/;
+            return phonePattern.test(phone);
+        }
+
+        function showError(id, errorMessage) {
+            const errorElement = document.getElementById(id);
+            errorElement.innerText = errorMessage;
+        }
+
+        function clearErrors() {
+            const errorElements = document.querySelectorAll(".error");
+            errorElements.forEach((element) => (element.innerText = ""));
+        }
+    });
+    function togglePasswordVisibility() {
+    const passwordField = document.getElementById("password-field");
+    const passwordToggle = document.getElementById("password-toggle");
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      passwordField.type = "password";
+      passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+  
+</script>
+
+
+    
+ {%endblock%}  
+  
+</body>
+</html>

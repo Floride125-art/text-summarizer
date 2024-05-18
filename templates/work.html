@@ -1,0 +1,86 @@
+{% extends 'base1.html' %}
+{% block body %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container" style="margin-top: 8%;">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+    
+          <li class="list-inline-item text-white h3 font-secondary nasted">Work abroad</li>
+        </ul>
+        <p class="text-lighten mb-0" style="text-align: center;">Work abroad is one of the services we offer to our aspirants by helping them to secure different jobs abroad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">WORK ABROAD APPLICATION FORM</h2>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <p class="mb-5">For this work abroad application form, you will have to be more careful and very attentive while you are filling it. 
+                <br><br>You will make sure that all fields are filled and all neccessary documents are uploaded as well. For any difficulties, do not hesitate to call us on the following contacts:
+            <h5>Contacts</h5>
+            <a href="tel:+25078937747" class="text-color h5 d-block">+25078937747</a>
+            <a href="mailto:yourmail@email.com" class="mb-5 text-color h5 d-block">meconsultancy@gmail.com</a>
+            <p>KN112, st<br>Kigali Rwanda</p>
+          </div>
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <form action="/workapplication" method="POST" enctype="multipart/form-data">
+          <label>Full Name:</label>
+          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Your Name.." required>
+          <label>Email Address:</label>
+          <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Email.." required>
+          <label>Phone Number</label>
+          <input type="phone" class="form-control mb-3" id="phone" name="phone" placeholder="phone(07..)" required>
+          <label>Job Title:</label>
+          <input type="text" class="form-control mb-3" id="title" name="title" placeholder="Title.." required>
+          <label>Which languages do you speak?:</label>
+          <input type="text" class="form-control mb-3" id="languages" name="languages" placeholder="Languages.." required>
+          <label>Country you would like to work in:</label>
+          <input type="text" class="form-control mb-3" id="country" name="country" placeholder="country.."  required>
+          <label>Duration for Job:</label>
+          <input type="text" class="form-control mb-3" id="duration" name="duration" placeholder="duration.."  required>   
+          <label>Upload CV:</label>
+          <input type="file" class="form-control mb-3" id="cv" name="cv" placeholder="cv..">  
+          <label>Upload Cover Letter:</label>
+          <input type="file" class="form-control mb-3" id="coverletter" name="coverletter" placeholder="cover letter..">    
+          <label>Upload Picture:</label>
+          <input type="file" class="form-control mb-3" id="picture" name="picture" placeholder="picture..">               
+          <button type="submit" value="send" class="btn btn-primary">SEND</button>
+        </form>
+      </div>
+  
+    </div>
+  </div>
+</section>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const countryParam = urlParams.get("location");
+      const durationParam = urlParams.get("duration");
+      const titleParam = urlParams.get("title");
+  
+      const countryField = document.getElementById("country");
+      const durationField = document.getElementById("duration");
+      const titleField = document.getElementById("title");
+  
+      if (countryParam) {
+        countryField.value = countryParam;
+      }
+  
+      if (durationParam) {
+        durationField.value = durationParam;
+      }
+  
+      if (titleParam) {
+        titleField.value = titleParam;
+      }
+    });
+  </script>
+  
+  {% endblock  %}

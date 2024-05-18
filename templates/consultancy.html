@@ -1,0 +1,120 @@
+{% extends 'base1.html' %}
+{% set active_page = "consultancy" %}
+ {% block body %}
+ <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+  <div class="container" style="margin-top: 10%;">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="blog.html">Services</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">our Consultancy</li>
+        </ul>
+        <p class="text-lighten mb-0">Our education consultancy focuses on giving advice for individuals related to education based on the program they are looking for and if it is align with their future goals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-gray">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h2 class="section-title" style="text-align: center;">Consultancy Request form</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-5">
+            <p class="mb-5">By filling this consultancy request form you agree to provide all required information as requested in form so that we get to know how we can help you out when it come to consulting you.
+                This is about your future gaols and education related so be give us all true details so that we know how we can help you out!
+            </p>
+            <a href="tel:+8802057843248" class="text-color h5 d-block">+25078937747</a>
+            <a href="mailto:yourmail@email.com" class="mb-5 text-color h5 d-block">meconsultancy@gmail.com</a>
+            <p>KN112, st<br>Kigali Rwanda</p>
+          </div>
+        <div class="col-lg-7 mb-4 mb-lg-0">
+          <form action="/contact.html" method="POST">
+            <input type="text" class="form-control mb-3" id="name" name="fname" placeholder="Your First Name" required>
+            <input type="text" class="form-control mb-3" id="name" name="lname" placeholder="Your Second Name" required>
+            <input type="text" class="form-control mb-3" id="name" name="educ" placeholder="Your Current Level of eduction" required>
+            <input type="text" class="form-control mb-3" id="name" name="study" placeholder="What do you want to study" required>
+            <input type="text" class="form-control mb-3" id="name" name="cgpa" placeholder="Your current cgpa or % marks" required>
+            <input type="text" class="form-control mb-3" id="subject" name="school" placeholder="Your dream university" required>
+            <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Your Email" required>
+            <textarea name="message" id="message" class="form-control mb-3" placeholder="Tell us in more details on how we can help you..." required></textarea>
+            <button type="submit" value="send" class="btn btn-primary">SEND MESSAGE</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">Recommended</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+  <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+    <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+      <img class="card-img-top rounded-0" src="{{ url_for('static', filename='images/blog/post-1.jpg')}}" alt="Post thumb">
+      <div class="card-body">
+        <!-- post meta -->
+        <ul class="list-inline mb-3">
+          <!-- post date -->
+          <li class="list-inline-item mr-3 ml-0">August 28, 2018</li>
+          <!-- author -->
+          <li class="list-inline-item mr-3 ml-0">By Somrat Sorkar</li>
+        </ul>
+        <a href="">
+          <h4 class="card-title">Lorem ipsum dolor amet, adipisicing eiusmod tempor.</h4>
+        </a>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicin</p>
+        <a href="" class="btn btn-primary btn-sm">read more</a>
+      </div>
+    </div>
+  </article>
+  <!-- blog post -->
+  <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+    <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+      <img class="card-img-top rounded-0" src="{{ url_for('static', filename='images/blog/post-2.jpg')}}" alt="Post thumb">
+      <div class="card-body">
+        <!-- post meta -->
+        <ul class="list-inline mb-3">
+          <!-- post date -->
+          <li class="list-inline-item mr-3 ml-0">August 13, 2018</li>
+          <!-- author -->
+          <li class="list-inline-item mr-3 ml-0">By Jonathon Drew</li>
+        </ul>
+        <a href="">
+          <h4 class="card-title">Lorem ipsum dolor amet, adipisicing eiusmod tempor.</h4>
+        </a>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicin</p>
+        <a href="" class="btn btn-primary btn-sm">read more</a>
+      </div>
+    </div>
+  </article>
+  <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+    <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+      <img class="card-img-top rounded-0" src="{{ url_for('static', filename='images/blog/post-3.jpg')}}" alt="Post thumb">
+      <div class="card-body">
+        <!-- post meta -->
+        <ul class="list-inline mb-3">
+          <!-- post date -->
+          <li class="list-inline-item mr-3 ml-0">August 24, 2018</li>
+          <!-- author -->
+          <li class="list-inline-item mr-3 ml-0">By Alex Pitt</li>
+        </ul>
+        <a href="">
+          <h4 class="card-title">Lorem ipsum dolor amet, adipisicing eiusmod tempor.</h4>
+        </a>
+        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicin</p>
+        <a href="" class="btn btn-primary btn-sm">read more</a>
+      </div>
+    </div>
+  </article>
+</div>
+  </div>
+</section>
+{% endblock  %}

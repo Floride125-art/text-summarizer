@@ -1,0 +1,70 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+  
+   input{
+    width: 40%;
+
+   }
+   #subtitle{
+    width: 60%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the button */
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Updating Testimonies </h1>
+    <a href="/viewtestify"><button>View The added Testimonies</button></a>
+
+   
+</div>
+
+<div>
+    
+    <p style="align-items: center; text-align: center; color: black;">This is a page for adding different Testimonies from our aspirants</p>
+    <form action="/edit/testimonies/{{id}}" method="POST" enctype="multipart/form-data">
+        <label for="title">Aspirant Name:</label>
+        <input type="text" id="name" name="name" value="{{post.name}}">
+        <label for="description">Testimony:</label>
+        <textarea id="description" name="description"></textarea>
+        <br></br>
+        <button type="submit">Edit Testimony</button>
+        <br></br>
+      </form>
+     
+      
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('#description').val('{{post.description}}');
+    });
+  </script>
+{% endblock %}

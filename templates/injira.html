@@ -1,0 +1,111 @@
+{% extends 'base1.html' %}
+{% set active_page = "injira" %}
+ {% block body %}
+ <style>
+  body{
+    background-color: #1A2933;
+  }
+.form-container {
+  background-color: #1A2933;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+#moncontainer{
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.password-container {
+  position: relative;
+}
+
+/* Styles for the password toggle button */
+#password-toggle {
+ 
+  background: none;
+  margin-left: -8%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+
+
+</style>
+<body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/analyzepc.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8" style="margin-top: 10%;">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Login</li>
+          </ul>
+          <p class="text-lighten mb-0">This is a login page section that will allow  students to login in our system and be able to submit course feedback</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <center><div class="container" id="moncontainer">
+    <div class="form-container" >
+      <form id="login-form" class="form" action="/injira" method="post">
+        {{ form.hidden_tag() }}
+       <center><h2 class="logheader" style="color: white;">Login</h2></center> 
+        <center><p style="color:white" class="myinput">
+            {{ form.email.label }} :<br>
+            {{ form.email(size=20,placeholder="Your Email") }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p></center>
+        <center> <p  style="color:white" class="myinput">
+          {{ form.password.label }} :<br>
+         
+          {{ form.password(size=20,id="password-field",placeholder="Your Password") }}
+          <button id="password-toggle" type="button" onclick="togglePasswordVisibility()">
+            <i class="fas fa-eye"></i>
+          </button>
+          {% for error in form.password.errors %}
+          <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}
+      </p></center>
+      
+      <center><div class="checkbox-section" >
+       
+          <p  style="color:white">{{ form.remember() }} {{ form.remember.label }}</p>
+        </div></center>
+       
+        <center><p class="button" id="login-form" style="font-size: 20px" class="button" style="font-size: 25px;color:black bold;">{{ form.submit()}}</p></center>
+        <div class="forgot-password-section" style="  margin-top: 5px;
+        text-align: center;">
+          <a href="/forgot_password">Forgot password?</a>
+        </div>
+        <div class="signup-section">
+          <p style="text-align: center;">Not registered? <a href="/register">Sign up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</center>
+
+<script>
+  function togglePasswordVisibility() {
+    const passwordField = document.getElementById("password-field");
+    const passwordToggle = document.getElementById("password-toggle");
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      passwordField.type = "password";
+      passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+  </script>
+
+ {%endblock%}  
+  
+</body>
+</html>

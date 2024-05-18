@@ -1,0 +1,194 @@
+{% extends 'base1.html' %}
+{% set active_page = "home" %}
+{% block body %}
+<style>
+ 
+    .carousel-control-prev,
+    .carousel-control-next {
+      filter: invert(80%);
+    }
+
+    #thiscontain {
+  
+  width: 100%;
+  max-width: 1000px; 
+  overflow-x: hidden; 
+  margin: 0 auto; 
+}
+
+.scrolling-container {
+  display: flex; 
+  overflow-x: auto; 
+  scroll-behavior: smooth; 
+}
+
+
+.card {
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 10px;
+  min-width: 400px; 
+}
+
+.card-content img {
+  max-width: 100%;
+}
+
+.card-title {
+  margin: 0;
+
+}
+</style>
+<body>
+
+<section class="hero-section overlay bg-cover" data-background="{{ url_for('static', filename='images/events/mytyping.jpg')}}">
+  <div class="container">
+    <div class="hero-slider">
+      <!-- slider item -->
+      <div class="hero-slider-item">
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">It is no longer hard to submit your student feedback!</h1>
+            <p class="text-muted mb-4" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">With this system, students are able to generate their feedback on how they feel about the courses</p>
+            </p>
+            <a href="/admission" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">View More</a>
+          </div>
+        </div>
+      </div>
+      <!-- slider item -->
+      <div class="hero-slider-item">
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="text-white" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".1">No more being limited while giving your feedback</h1>
+            <p class="text-muted mb-4" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".4">This student feedback system will allow you to generate any sort of feedback of how you feel about the course easily
+            </p>
+            <a href="/visit" class="btn btn-primary" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".7">Submit Feedback</a>
+          </div>
+        </div>
+      </div>
+      <!-- slider item -->
+      <div class="hero-slider-item">
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">Your feedback will be summarized with this system</h1>
+            <p class="text-muted mb-4" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".4">The faculties and course cordinators will be able to summarize the student feedback submitted in order to get to know key ideas or how student feel about the course
+            <a href="/injira" class="btn btn-primary" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="zoomIn" data-delay-in=".7">View Feedback</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray overflow-md-hidden">
+  <div class="container-fluid p-0">
+    <div class="row no-gutters">
+      <div class="col-xl-4 col-lg-5 align-self-end">
+        <img class="img-fluid w-100" src="{{ url_for('static', filename='images/banner/banner-feature.png')}}" alt="banner-feature">
+      </div>
+      <div class="col-xl-8 col-lg-7">
+        <div class="row feature-blocks bg-gray justify-content-between">
+          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+            <i class="ti-book mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">On Students' side</h3>
+            <p>This system is made to help student generate their feedback and how they feel about the course without being limited on what they should submit or write about the course.
+            </p>
+          </div>
+          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+            <i class="ti-user mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">On Faculty's side</h3>
+            <p>The faculties will be able to view students' feedback submitted and be able to summarize them automatically to extract key ideas.</p>
+          </div>
+          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+            <i class="ti-home mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">On School Side</h3>
+            <p>The idea of collecting student feedback about course and faculties will improve the students' performance as they will know how to deal with them or know where to make improvement</p>
+          </div>
+          <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
+            <i class="ti-write mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
+            <h3 class="mb-xl-4 mb-lg-3 mb-4">About Education</h3>
+            <p>The idea of collecting student feedback clearly make a great impact in education system as of the best way of fulfilling all the wishes requested by student and improve the course performance </p>
+          </div>
+          <a href="/about" class="btn btn-outline-primary">Know more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<div class="container-xxl py-5">
+  <div class="container">
+      <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+          
+          <h2 class="mb-5">courses Feedback</h2>
+          <center><p>This course feedback system is mainly devided into three parts
+      </div>
+      <div class="row g-4 justify-content-center">
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+              <div class="course-item bg-light">
+                  <div class="position-relative overflow-hidden">
+                      <img class="img-fluid" src="{{ url_for('static', filename='images/banner/bantu.jpg')}}" alt="">
+                     
+                  </div>
+                  <div class="text-center p-4 pb-0">
+                      <h3 class="mb-0">Submission of Course Feedback</h3>
+                     
+                      <p class="mb-4">On this part students are able to generate their feedback about the course freely by typying..</p>
+                  </div>
+                  <div class="d-flex border-top">
+  
+                      <small class="flex-fill text-center border-end py-2"><a href="/consultancyedu" style="font-weight: bold;">Submit Feedback</a></small>
+                  
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+              <div class="course-item bg-light">
+                  <div class="position-relative overflow-hidden">
+                      <img class="img-fluid" src="{{ url_for('static', filename='images/events/faculty.jpg')}}" alt="">
+                  
+                  </div>
+                  <div class="text-center p-4 pb-0">
+                      <h3 class="mb-0">Summarize the student feedback</h3>
+                      
+                      <p class="mb-4">The faculties or course cordinators are the one who have responsibilities of summarize the submitted feedback..</p>
+                  </div>
+                  <div class="d-flex border-top">
+                    
+                      <small class="flex-fill text-center border-end py-2"><a href="/injira" style="font-weight: bold;">Know More</a></small>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+              <div class="course-item bg-light">
+                  <div class="position-relative overflow-hidden">
+                      <img class="img-fluid" src="{{ url_for('static', filename='images/events/analyzepc.jpg')}}" alt="">
+                    
+                  </div>
+                  <div class="text-center p-4 pb-0">
+                      <h3 class="mb-0">Analyse submitted Student Feedback</h3>
+                     
+                      <p class="mb-4">The summarized course feedback submitted are then later analyzed so as to know some improvements to make
+                  </div>
+                  <div class="d-flex border-top">
+                      <small class="flex-fill text-center border-end py-2"><a href="/visit" style="font-weight: bold;">Know More</a></small>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+    
+  </body>
+    {% endblock %}
+ 
+
+
+

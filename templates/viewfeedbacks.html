@@ -1,0 +1,62 @@
+{% extends 'ahabanza.html' %}
+
+{% block contentfluid %}
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">View the submitted feedback</h1>
+   
+</div>
+<center>
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Teacher registered</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{  teacher_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-solid fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </center>
+<div class="container">
+    <div class="row">  
+      <h1><center>Added Lecturer</center></h1>
+      <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Full Name</th>
+              <th>Email</th>
+              <th>User's Subject</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tchr in teacher %}
+            <tr>
+              <td>{{tchr.id}}</td> 
+              <td>{{tchr.name}}</td>
+              <td>{{tchr.email}}</td>
+              <td>{{tchr.course}}</td>
+             
+              <td></td>
+              
+              <td><a href="/edit/user/{{tchr.id}}"><button class="btn btn-primary">Update</button></a></td>
+              <td><a href="/delete/user/{{tchr.id}}"><button class="btn btn-primary">Delete</button></a></td>
+            </tr>  
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+     
+      
+    </div>
+  
+
+
+{% endblock %}

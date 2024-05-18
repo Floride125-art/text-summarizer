@@ -1,0 +1,32 @@
+{% extends 'coursedashboard.html' %}
+{% block contentfluid %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="mt-4">Summarize The Feedback for {{ course_code }}</h1>
+            <div class="form-group">
+                <label for="feedback">Feedback:</label>
+                <textarea class="form-control" id="feedback" rows="10" readonly>{{ feedback.feedback }}</textarea>
+            </div>
+            <button id="summarize-btn" class="btn btn-primary mt-3">Summarize</button>
+            <br><br/>
+            <div id="summary-section" style="display: none;" class="form-group">
+                <label for="summarized-feedback">Summarized Feedback:</label>
+                <textarea class="form-control" id="summarized-feedback" rows="10" readonly></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('summarize-btn').addEventListener('click', function() {
+        fetch(window.location.href, {
+            method: 'POST'
+        }).then(response => response.json())
+          .then(data => {
+              document.getElementById('summary-section').style.display = 'block';
+              document.getElementById('summarized-feedback').value = data.summary;
+          });
+    });
+</script>
+{% endblock %}

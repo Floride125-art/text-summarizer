@@ -1,0 +1,68 @@
+{% extends 'base1.html' %}
+{% set active_page = "register" %}
+
+ {% block body %}
+ <style>
+   body{
+    background-color: #1A2933;
+  }
+.form-container {
+  background-color: #1A2933;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+#moncontainer{
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.password-container {
+  position: relative;
+}
+
+#password-toggle {
+ 
+  background: none;
+  margin-left: -8%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+
+
+</style>
+<body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/mytyping.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8" style="margin-top: 10%;">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Thanks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <center><div class="container" id="moncontainer">
+    <div class="form-container" >
+      <form id="login-form" class="form" action="/register" method="post">
+        {{ form.hidden_tag() }}
+        
+ <center> <h2 style="color:white" class="logheader">Dear Lecturer!</h2></center>
+ <center> <p style="color:white" class="logheader">Thanks for registering your email and please check your email inbox in order to get login credentials so that you can login and access students feedback </p></center>
+
+        </div>
+      </form>
+    </div>
+  </div></center>
+
+
+    
+ {%endblock%}  
+  
+</body>
+</html>

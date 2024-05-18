@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% set active_page = "contact" %}
+{% block content %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item text-white h3 font-secondary nasted">Contact Us</li>
+        </ul>
+        <p class="text-lighten mb-0">This is page for contacting us for any querry or concerns regarding our services and wait for us to come back on you in short period of time!</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">Contact Us</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-7 mb-4 mb-lg-0">
+        <form action="/usrcontact" method="POST">
+          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Your Name"  value="{{ current_user.name }}" required>
+          <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Your Email" value="{{ current_user.email }}" required>
+          <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="Subject" required>
+          <textarea name="message" id="message" class="form-control mb-3" placeholder="Your Message" required></textarea>
+          <button type="submit" value="send" class="btn btn-primary">SEND MESSAGE</button>
+        </form>
+      </div>
+      <div class="col-lg-5">
+        <p class="mb-5">Contacting us is the best option you can do for any querry or support please fill the form provided and contact us for any service. We will always appreciate you approaching us and talk to us for any issue or any concerns that may rise up at any time!
+          do not hesitate to talk to us any time you feel you want to and again remember to keep it professional.
+        </p>
+        <a href="tel:+8802057843248" class="text-color h5 d-block">+25078937747</a>
+        <a href="mailto:yourmail@email.com" class="mb-5 text-color h5 d-block">meconsultancy@gmail.com</a>
+        <p>KN112, st<br>Kigali Rwanda</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pt-0">
+  <!-- Google Map -->
+  <div id="map_canvas" data-latitude="-1.935114" data-longitude="30.082111"></div>
+</section>
+  {% endblock  %}

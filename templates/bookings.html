@@ -1,0 +1,75 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+ 
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+  
+
+   input{
+    width: 40%;
+
+   }
+   #subtitle{
+    width: 60%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the button */
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+ 
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add Places</h1>
+    <a href="/viewplaces"><button>View The added Places</button></a>
+   
+</div>
+
+<div>
+    
+    <p style="align-items: center; text-align: center; color: black;">This is a page for adding places to book for travel</p>
+    <form action="/bookingsadd" method="POST" enctype="multipart/form-data">
+        <label for="document">Add place image here:</label>
+        <input type="file" id="myimage" name="myimage" accept=".png,.jpg,.jpeg"/>
+        <label for="title">Place Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="price">price per person:</label>
+        <input type="text" id="price" name="price" required>
+        <label for="days">Days:</label>
+        <input type="text" id="days" name="days" required>
+        <label for="place">Location:</label>
+        <input type="text" id="place" name="place" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <br></br>
+        
+        <button type="submit">Add Place</button>
+        <br></br>
+      </form>
+     
+      
+</div>
+{% endblock %}

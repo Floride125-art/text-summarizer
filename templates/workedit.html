@@ -1,0 +1,75 @@
+{% extends "ahabanza.html" %}
+{% block contentfluid %}
+<style>
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+ 
+ input{
+  width: 40%;
+
+ }
+ #subtitle{
+  width: 60%;
+
+ }
+  textarea {
+    width: 60%;
+    height: 150px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  
+  button[type="submit"], button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+
+    <h1>Update Work</h1>
+    <hr>
+    
+        <form action="/edit/work/{{id}}" method="POST" enctype="multipart/form-data">
+          <label for="title"> Job Title:</label>
+          <input type="text" id="title" name="title" value="{{post.title}}">
+          <label for="subtitle">Subtitle:</label>
+          <input type="text" id="subtitle" name="subtitle" value="{{post.subtitle}}">
+          <label for="subtitle">Location:</label>
+          <input type="text" id="location" name="location" value="{{post.location}}">
+          <label for="subtitle">Job Duration:</label>
+          <input type="text" id="duration" name="duration" value="{{post.duration}}">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" value="{{post.description}}"></textarea>
+          <br></br>
+          
+          <button type="submit">Edit work</button>
+          <br></br>
+        </form>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  
+  $(document).ready(function() {
+    $('#description').val('{{post.description}}');
+  });
+</script>
+       
+       
+    
+
+{% endblock %}

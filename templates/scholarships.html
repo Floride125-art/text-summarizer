@@ -1,0 +1,66 @@
+{% extends 'ahabanza.html' %}
+
+{% block contentfluid %}
+<style>
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+ 
+   input{
+    width: 40%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    button[type="submit"] {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+   <!-- Page Heading -->
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add a Teacher</h1>
+    <a href="/viewscholarship"><button>View The added Teachers</button></a>
+   
+</div>
+
+<!-- Content -->
+<div>
+  
+    <h1 style="align-items: center; text-align: center; color: black;">Teachers</h1>
+    <p style="align-items: center; text-align: center; color: black;">This is a page for adding teachers who will be allowed to view students marks</p>
+    <form action="/scholarshipadd" method="POST">
+        <label for="title">Full Name:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="title">Email:</label>
+        <input type="text" id="title" name="title" required>
+        
+        
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        
+        <button type="submit">Add Admission</button>
+      </form>
+      
+
+</div>
+{% endblock %}

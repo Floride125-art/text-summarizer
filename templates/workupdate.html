@@ -1,0 +1,83 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+ 
+    img{
+      width: 100%;
+    }
+    .course-item {
+    height: 500px; 
+    overflow: auto; 
+  }
+  
+  .course-item .position-relative {
+    height: 40%; 
+  }
+  
+  .course-item .text-start,
+  .course-item .text-start {
+    height: calc(100% - 200px); 
+    padding: 20px; 
+  }
+  
+  .course-item h3 {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item p {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item .d-flex {
+    padding: 10px; 
+  }
+  
+  </style>
+  <body>
+  <div class="row" style=" margin-top: 2%;">
+    {% for admission in admissions %}
+    <div class="col-md-4" style="margin-bottom: 5%;">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="course-item bg-light">
+            <div class="position-relative overflow-hidden">
+                <img class="img-fluid" src="{{ url_for('work_image', admission_id=admission.id) }}" alt="work Image" >
+            </div>
+            <div class="text-start p-4 pb-0"> 
+                <h3 class="mb-0">{{ admission.title }}</h3>          
+                <p class="mb-4">{{ admission.subtitle }}</p>
+                <p class="mb-4">Location: {{ admission.location }}</p>
+                <p class="mb-4">Duration: {{ admission.duration }}</p>
+                
+                <p class="cost" id="description{{ admission.id }}" style="display: none;">{{ admission.description }}</p>
+                <button class="btn btn-primary btn-sm"onclick="toggleDescription({{ admission.id }})" style="border-radius: 5px;">read more</button>
+                <button class="btn btn-primary btn-sm"onclick="" style="border-radius: 5px; margin-bottom: 2%;"><a href="/edit/work/{{admission.id}}" style="color: white;">Update</a></button>
+                <button class="btn btn-primary btn-sm"onclick="" style="border-radius: 5px; margin-bottom: 2%;"><a href="/delete/work/{{admission.id}}" style="color: white;">Delete/Remove</a></button>
+                
+   
+            </div>
+           
+        </div>
+         
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <script>
+     function toggleDescription(admissionId) {
+          const description = document.getElementById("description" + admissionId);
+          const viewMoreBtn = document.getElementById("toggleButton" + admissionId);
+  
+          if (description.style.display === "none") {
+              description.style.display = "block"; 
+              viewMoreBtn.textContent = "Hide";
+          } else {
+              description.style.display = "none"; 
+              viewMoreBtn.textContent = "View More"; 
+          }
+      }
+  
+  </script>
+  </body>
+{% endblock %}

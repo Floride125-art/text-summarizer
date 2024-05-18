@@ -1,0 +1,28 @@
+{% extends 'base2.html' %}
+{% set active_page = "profile" %}
+{% block content %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item text-white h3 font-secondary nasted">My Profile</li>
+        </ul>
+        <p class="text-lighten mb-0">This is section where you will get some of your personal information and details that you regisetred within this website</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+    <h1>{{ current_user.name }}</h1>
+    <hr style="width:50%; border-width: 5px; background-color: black;">
+    <p><b>Email Address:</b> {{ current_user.email }}</p>
+    <p><b>Phone Number:</b> {{ current_user.number }}</p>
+    <p><b>Role:</b> {{ current_user.role }} </p>
+    <td><a href="/edit/details/{{current_user.id}}"><button class="btn btn-primary">Edit</button></a></td>
+   
+   
+
+<!-- /page title -->
+
+  {% endblock  %}

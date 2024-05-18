@@ -1,0 +1,209 @@
+{% extends 'teacherdashboard.html' %}
+{% block contentfluid %}
+<style>
+  .coursecontainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .filter-panel {
+    width: 30%;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .course-panel {
+    width: 65%;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .filter-group {
+    margin-bottom: 20px;
+  }
+  
+  .checkbox-group {
+  
+    flex-wrap: wrap;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    margin-right: 5px;
+  }
+  
+  .course-cards {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .course-card {
+    width: 30%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  .myapplybutton{
+    background: #85d6de;
+    }
+</style>
+
+ <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/andik.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8" style="margin-top: 10%;">
+       
+        <p class="text-lighten mb-0">This page is mainly made for viewing different courses and see some student feedback submitted as well </p>
+        <p class="text-lighten mb-0">Lecturers have to select their perspective courses and view who submitted the course feedback. </p>
+    
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="coursecontainer">
+    <div class="course-panel">
+      <h2>Courses</h2>
+      <div class="course-cards" id="courses">
+        {% for course in courses %}
+        <div class="course-card" data-semester="{{ course.semester }}" data-major="{{ course.major }}" data-category="{{ course.category }}">
+          {{ course.course }}
+          <p> ({{ course.code}})</p>
+          <button class="myapplybutton" type="submit">
+            <a href="{{ url_for('view_feedback', course_code=course.course) }}">View Feedback</a>
+        </button>
+        
+        </div>
+       
+        {% endfor %}
+      </div>
+    </div>
+    <div class="filter-panel">
+      <h2>Filter The course</h2>
+      <div class="filter-group">
+        <strong><label>Select School:</label></strong>
+
+        <div class="checkbox-group">
+          <input type="radio" id="School of Technology" name="category" value="School of Technology">
+           <label for="School of Technology"> School of Technology</label><br>
+           <input type="radio" id="School of Liberal Studies" name="category" value="School of Liberal Studies">
+           <label for="School of Liberal Studies">School of Liberal Studies</label><br>
+           <input type="radio" id="som" name="category" value="som">
+           <label for="som">School of Management</label><br>
+           <input type="radio" id="School of Petroleum Technology" name="category" value="School of Petroleum Technology">
+           <label for="School of Petroleum Technology">School of Petroleum Technology</label><br>
+           
+         </div>
+       </div>
+       <strong><label>Select Semester:</label></strong>
+        <div class="checkbox-group">
+         <input type="radio" id="1" name="semester" value="1">
+          <label for="1"> Semester1</label><br>
+          <input type="radio" id="2" name="semester" value="2">
+          <label for="2">Semester2</label><br>
+          <input type="radio" id="3" name="semester" value="3">
+          <label for="3">Semester3</label><br>
+          <input type="radio" id="4" name="semester" value="4">
+          <label for="4">Semester4</label><br>
+          <input type="radio" id="5" name="semester" value="5">
+          <label for="5">Semester5</label><br>
+          <input type="radio" id="6" name="semester" value="6">
+          <label for="6">Semester6</label><br>
+          <input type="radio" id="7" name="semester" value="7">
+          <label for="7">Semester7</label><br>
+          <input type="radio" id="8" name="semester" value="8">
+          <label for="8">Semester8</label><br>
+        </div>
+      <div class="filter-group">
+        <strong><label>Select Major:</label> </strong>
+        <div class="checkbox-group">
+          <input type="radio" id="Computer Science and Engineering" name="major" value="Computer Science and Engineering">
+          <label for="Computer Science and Engineering">Computer Science and Engineering</label><br>
+          <input type="radio" id="ict" name="major" value="ict">
+          <label for="ict">Information Communication Technology</label><br>
+          <input type="radio" id="ee" name="major" value="ee">
+          <label for="ee">Electrical Engineering</label><br>
+          <input type="radio" id="ee" name="major" value="ee">
+          <label for="me">Mechanical Engineering</label><br>
+          <input type="radio" id="me" name="major" value="me">
+          <label for="ce">Civil Engineering</label><br>
+          <input type="radio" id="Petroleum Engineering" name="major" value="Petroleum Engineering">
+          <label for="Petroleum Engineering">Petroleum Engineering</label><br>
+          <input type="radio" id="pe" name="major" value="pe">
+          <label for="ae">Automobile Engineering</label><br>
+          <input type="radio" id="BA/BBA" name="major" value="BA/BBA">
+          <label for="BA/BBA">School of Liberal Studies</label><br>
+          <input type="radio" id="chem" name="major" value="chem">
+          <label for="ece">Electronics & Communication Engineering</label><br>
+          <input type="radio" id="ece" name="major" value="ece">
+          <label for="bio">Biotechnology</label><br>
+        </div>
+      </div>
+      <button id="applyFilters">Apply Filters</button>
+    </div>
+  </div>
+</section>
+<script>
+  const semesterFilters = document.querySelectorAll('input[name="semester"]');
+  const majorFilters = document.querySelectorAll('input[name="major"]');
+  const categoryFilters = document.querySelectorAll('input[name="category"]');
+  const courseCards = document.querySelectorAll('.course-card');
+  const applyFiltersButton = document.getElementById('applyFilters');
+  
+  function filterCourses() {
+    var selectedSemesters = getSelectedValues('semester');
+    var selectedMajors = getSelectedValues('major');
+    var selectedCategories = getSelectedValues('category');
+  
+    for (var i = 0; i < courseCards.length; i++) {
+      var card = courseCards[i];
+      var semester = card.getAttribute('data-semester');
+      var major = card.getAttribute('data-major');
+      var category = card.getAttribute('data-category');
+  
+      var isVisible = (selectedSemesters.length === 0 || selectedSemesters.includes(semester)) &&
+                      (selectedMajors.length === 0 || selectedMajors.includes(major)) &&
+                      (selectedCategories.length === 0 || selectedCategories.includes(category));
+  
+      if (isVisible) {
+        if (selectedSemesters.includes('1') && selectedMajors.includes('Computer Science and Engineering') && selectedCategories.includes('School of Technology')) {
+          if (major === 'Computer Science and Engineering' && category === 'School of Technology' && semester === '1') {
+            card.style.display = 'block';
+          } 
+          else if (major === 'Computer Science and Engineering' && category === 'School of Technology' && semester === '2'){
+            card.style.display = 'block';
+          }
+          else if (major === 'Computer Science and Engineering' && category === 'School of Technology' && semester === '3'){
+            card.style.display = 'block';
+          }
+          else if (major === 'BA/BBA' && category === 'School of Liberal Studies' && semester === '1'){
+            card.style.display = 'block';
+          }
+          else if (major === 'BA/BBA' && category === 'School of Liberal Studies' && semester === '3'){
+            card.style.display = 'block';
+          }
+       
+        }
+      } else {
+        card.style.display = 'none';
+      }
+    }
+  }
+  
+  function getSelectedValues(name) {
+    var inputs = document.querySelectorAll('input[name="' + name + '"]:checked');
+    var values = [];
+    inputs.forEach(function(input) {
+      values.push(input.value);
+    });
+    return values;
+  }
+  
+  applyFiltersButton.addEventListener('click', filterCourses);
+</script>
+{% endblock  %}

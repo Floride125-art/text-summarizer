@@ -1,0 +1,74 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+   input{
+    width: 40%;
+
+   }
+   #subtitle{
+    width: 60%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the button */
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+   <!-- Page Heading -->
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Update Places</h1>
+    <hr>
+   
+</div>
+<div>
+    
+   
+  <form action="/edit/places/{{id}}" method="POST" enctype="multipart/form-data">
+        <label for="title">Place Title:</label>
+        <input type="text" id="title" name="title" value="{{post.title}}">
+        <label for="price">price per person:</label>
+        <input type="text" id="price" name="price" value="{{post.price}}">
+        <label for="days">Days:</label>
+        <input type="text" id="days" name="days" value="{{post.days}}">
+        <label for="place">Location:</label>
+        <input type="text" id="place" name="place" value="{{post.place}}">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+        <br></br>
+        
+        <button type="submit">Update Place</button>
+        <br></br>
+      </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#description').val('{{post.description}}');
+  });
+</script>
+{% endblock %}

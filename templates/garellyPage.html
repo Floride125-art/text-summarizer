@@ -1,0 +1,40 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/visit.css')}}" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+.w3-half img{margin-bottom:6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+h2{
+  text-align: center;
+}
+.card-container {
+  padding: 10px;
+}
+
+.card {
+  margin-bottom: 20px;
+  margin-left: 10%;
+}
+</style>
+
+  <div class="w3-row-padding">
+    <h2>The Added Pictures in Garelly</h2>
+    <div class="w3-row">
+      {% for garelly in garelly %}
+      <div class="w3-col s12 m6">
+        <div class="card-container">
+          <div class="card">
+            <img src="{{ url_for('garelly_image', garelly_id=garelly.id) }}" onclick="onClick(this)" alt="{{ garelly.name }}">
+            <p class="card-text"><center><i>{{ garelly.name }}</i></center></p>
+            <button class="btn btn-primary btn-sm"onclick="" style="border-radius: 5px;"><a href="/delete/garelly/{{garelly.id}}" style="color: white; text-decoration: none;">Delete/Remove</a></button>
+          </div>
+
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% endblock  %}

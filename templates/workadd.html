@@ -1,0 +1,75 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+    /* Center the form */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+  
+    /* Increase input and textarea size */
+   input{
+    width: 40%;
+
+   }
+   #subtitle{
+    width: 60%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the button */
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+   <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Work Abroad opportunities </h1>
+    <a href="/working"><button>View The added Work abroad</button></a>
+
+   
+</div>
+
+<!-- Content -->
+<div>
+    <h1 style="align-items: center; text-align: center; color: black;">Work Abroad</h1>
+    <p style="align-items: center; text-align: center; color: black;">This is a page for adding some work abroad available jobs and opportunities</p>
+    <form action="/workadd" method="POST" enctype="multipart/form-data">
+        <label for="title"> Job Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="subtitle">Subtitle:</label>
+        <input type="text" id="subtitle" name="subtitle" required>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+        <label for="duration">Job Duration:</label>
+        <input type="text" id="duration" name="duration" required>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+        <label for="document">Add image here:</label>
+        <input type="file" id="myimage" name="image" accept=".png,.jpg,.jpeg"/>
+        <br></br>
+        <button type="submit">Add Work</button>
+        <br></br>
+      </form>
+     
+      
+</div>
+{% endblock %}

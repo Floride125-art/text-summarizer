@@ -1,0 +1,216 @@
+{% extends 'base1.html' %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  {% block body %}
+
+  <body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item">
+              <a class="h2 text-primary font-secondary" >
+                Faculty Dashboard</a>
+              </li>
+  
+          </ul>
+          <p class="text-lighten mb-0">This is the page for the faculties to be able to view the submitted student feedback.</p>
+          <p class="text-lighten mb-0">Below are some information cards for different courses and depending on the course or subject you teach you will click on that particular card of your course and be able to view student feedback submitted.</p>
+          <p class="text-lighten mb-0">For each student feedback submitted, you will be able to summarize the course feedback given and get main ideas as well.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <h2 style="margin-top: 2%; text-align: center;">Select course stream you are intersted in </h2>
+
+  <div class="row" style="margin-bottom: 10%; margin-top: 2%;">
+    {% for studentdetails in studentdetail %}
+    <div class="col-md-4">
+      <div class="card h-100" id="card-{{ studentdetails.id }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ studentdetails.name }}</h5>
+          <p class="card-text">
+            <strong>Roll Number:</strong> {{ studentdetails.rname }}<br>
+          
+
+            <strong>Course Stream:</strong> {{ studentdetails.cse}}<br>
+            <strong>Course Stream:</strong> {{ studentportal.statustype }}<br>
+            <strong>Email:</strong> {{ studentportal.email }}<br>
+            <strong>Phone number:</strong> {{ studentportal.pnumber }}<br>
+            <strong>Address:</strong> {{ studentportal.address }}<br>
+            <strong>Program:</strong> {{ studentportal.program }}<br>
+            <strong>Education:</strong> {{ studentportal.education }}<br>
+            <strong>Gender:</strong> {{ studentportal.gender }}<br>
+            {% if studentportal.oleveldoc %}
+              <strong>Olevel certificate:</strong>
+              <a href="{{ url_for('download_document', student_id=studentportal.id, field='oleveldoc') }}">{{ studentportal.oleveldoc_filename }}</a><br>
+            {% endif %}
+            {% if studentportal.aleveldoc %}
+              <strong>Alevel certificate:</strong>
+              <a href="{{ url_for('download_document', student_id=studentportal.id, field='aleveldoc') }}">{{ studentportal.aleveldoc_filename }}</a><br>
+            {% endif %}
+            {% if studentportal.bachelor %}
+              <strong>Bachelor's Degree:</strong>
+              <a href="{{ url_for('download_document', student_id=studentportal.id, field='bachelor') }}">{{ studentportal.bachelor_filename }}</a><br>
+            {% endif %}
+            {% if studentportal.masters %}
+              <strong>Master's Degree:</strong>
+              <a href="{{ url_for('download_document', student_id=studentportal.id, field='masters') }}">{{ studentportal.masters_filename }}</a><br>
+            {% endif %}
+            {% if studentportal.myid %}
+            <strong>My ID:</strong>
+            <a href="{{ url_for('download_document', student_id=studentportal.id, field='myid') }}">{{ studentportal.myid }}</a><br>
+          {% endif %}
+          {% if studentportal.mypassport %}
+          <strong>My passport:</strong>
+          <a href="{{ url_for('download_document', student_id=studentportal.id, field='mypassport') }}">{{ studentportal.myport }}</a><br>
+        {% endif %}
+        {% if studentportal.mycv %}
+          <strong>My CV:</strong>
+          <a href="{{ url_for('download_document', student_id=studentportal.id, field='mycv') }}">{{ studentportal.mycv }}</a><br>
+        {% endif %}
+          </p>
+          <td>
+            Under Process: 
+            {% if studentportal.status == 'yes' %}
+              Yes | <a href="{{ url_for('update_status', student_id=studentportal.id, status='no') }}">Not Under Process</a>
+            {% else %}
+              No | <a href="{{ url_for('update_status', student_id=studentportal.id, status='yes') }}">Under Process</a>
+            {% endif %}
+          </td>
+          <br>
+
+          <form action="/upload_admission_letter/{{ studentportal.id }}" method="post" enctype="multipart/form-data">
+            <!-- Inside your HTML form -->
+            <input type="file" id="admission_letter" name="admission_letter" accept=".pdf,.doc,.docx" style="margin-bottom: 2%;">
+            <textarea id="notes{{ studentportal.id }}" name="notes" placeholder="add notes here...." rows="5" style="display: none;"></textarea>
+            <button type="submit" class="btn btn-success btn-sm" style="margin-bottom: 2%;">Upload Admission Letter</button>
+            
+
+          </form>
+        <button class="btn btn-success btn-sm" id="" onclick="" style="margin-bottom: 2%;"><a data-toggle="modal" data-target="#signupModal">Compose Admission data</a>
+        
+        </button>
+        
+        <button class="btn btn-success btn-sm"onclick="toggleDescription({{ studentportal.id }})">Add Notes</button>
+        <button class="btn btn-success btn-sm" id="done-btn-{{ studentportal.id }}" onclick="showConfirmation('{{ studentportal.id }}')">Done</button>
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Compose Admission Data </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form action="/send_email" class="row" method="post">
+                        <div class="col-12">
+                            <label for="recipient_email">Recipient's Email Address:</label>
+                            <input type="email" class="form-control mb-3" id="recipient_email" name="recipient_email" placeholder="Email" required>
+                        </div>
+                        {% for studentportal in studentportals %}
+                        <div class="col-12">
+                            <input class="form-control mb-3" type="hidden" name="student_id" value="{{ studentportal.id }}">
+                        </div>
+                        {% endfor %}
+                      
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">SEND EMAIL</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+  <script>
+    function showConfirmation(studentId) {
+      if (confirm('Are you sure you want to discard this card?')) {
+        // Make an AJAX request to delete the card from the server
+        fetch('/delete_card', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            student_id: studentId
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Card deleted successfully');
+            removeCard(studentId);
+          } else {
+            console.error('Failed to delete card');
+          }
+        })
+        .catch(error => {
+          console.error('An error occurred while deleting card:', error);
+        });
+      }
+    }
+  
+    function removeCard(studentId) {
+      var cardId = 'card-' + studentId;
+      var card = document.getElementById(cardId);
+      card.remove();
+    }
+
+    const admissionForm = document.getElementById("admissionForm");
+  const showFormBtn = document.getElementById("showFormBtn");
+
+  admissionForm.style.display = "none";
+
+  showFormBtn.addEventListener("click", function() {
+  
+    if (admissionForm.style.display === "none") {
+      admissionForm.style.display = "block";
+    } else {
+      admissionForm.style.display = "none";
+    }
+  });
+
+
+function toggleDescription(studentId) {
+        const description = document.getElementById("notes" + studentId);
+        const viewMoreBtn = document.getElementById("toggleButton" + studentId);
+
+        if (description.style.display === "none") {
+            description.style.display = "block"; 
+            viewMoreBtn.textContent = "Hide"; 
+        } else {
+            description.style.display = "none"; 
+            viewMoreBtn.textContent = "View More";
+        }
+    } 
+  </script>
+  
+  <style>
+    .card {
+      
+      margin-left: 10%;
+      margin-top: 10%;
+   
+    }
+    .hidden {
+    display: none;
+}
+  </style>
+  </body>
+ {%endblock%}   
+
+
+  

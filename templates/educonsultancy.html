@@ -1,0 +1,46 @@
+{% extends 'base1.html' %}
+{% set active_page = "services" %}
+{% block body %}
+
+ <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/banner/mepics.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="">Services</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">Education Consultancy</li>
+        </ul>
+        <p class="text-lighten mb-0">Our education consultant program is here to give valuable and best advice for our aspirants who wants to start their study abraod journey.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <img class="img-fluid w-100 mb-4" src="{{ url_for('static', filename='images/banner/enodepic.JPEG')}}" alt="about image">
+        <h2 class="section-title">Any Queries or difficulties? Don't worry we got you!</h2>
+        <p>With ME Consultancy Agency , we are able to give the best education advice and help our aspirant to make the right and best education decision.
+            We know that when it comes to taking decisions regarding education, it can be very overwhelming and challenging so we help you to know which best path to follow when it comes to deciding where to further our education.
+        </p>
+        <p>Whenever you feel like confused or you don't understand well whether to continue your education abroad or you find it hard to get a university abroad,
+            we are here for you. Talk to us for any query you have that is bothering you anyhow! 
+        </p>
+        <p>
+            This is not only about education concerning matter but also the matter of working abroad. We are here to remove all those confusion and misunderstandings people have about work abroad services as 
+            well us not knowing those who wants to helpand those who willscam them. We are agent that can truly trust and we promise to take you throughout all the application process till you land your job in 
+            the company you have applied for.
+        </p>
+  
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /about -->
+
+<!-- success story -->
+
+
+{% endblock  %}

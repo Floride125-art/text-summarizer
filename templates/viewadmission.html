@@ -1,0 +1,77 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+
+  img{
+    width: 100%;
+  }
+  .course-item {
+  height: 450px; 
+  overflow: auto; 
+}
+
+.course-item .position-relative {
+  height: 200px; 
+}
+
+.course-item .text-start,
+.course-item .text-start {
+  height: calc(100% - 200px); 
+  padding: 20px; 
+}
+
+.course-item h3 {
+  margin-bottom: 10px; 
+}
+
+.course-item p {
+  margin-bottom: 10px; 
+}
+
+.course-item .d-flex {
+  padding: 10px; 
+}
+
+</style>
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item">
+            <a class="h2 text-primary font-secondary" >
+              Added Admissions</a>
+            </li>
+
+        </ul>
+      
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row" style=" margin-top: 2%;">
+  {% for admission in admissions %}
+  <div class="col-md-4" style="margin-bottom: 5%;">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="course-item bg-light">
+          <div class="position-relative overflow-hidden">
+              <img class="img-fluid" src="{{ url_for('admission_image', admission_id=admission.id) }}" alt="Admission Image" >
+          </div>
+          <div class="text-start p-4 pb-0"> 
+              <h3 class="mb-0">{{ admission.title }}</h3>          
+              <p class="mb-4">{{ admission.subtitle }}</p>
+              <small class="flex-fill text-center border-end py-2"> <a href="blog-single.html" class="btn btn-primary btn-sm">read more</a></small>
+              <small class="flex-fill text-center border-end py-2"> <a href="blog-single.html" class="btn btn-primary btn-sm">Update</a></small>
+              <small class="flex-fill text-center border-end py-2"> <a href="blog-single.html" class="btn btn-primary btn-sm">Delete</a></small>
+          </div>
+         
+      </div>
+       
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

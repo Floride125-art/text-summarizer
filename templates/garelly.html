@@ -1,0 +1,378 @@
+{% extends 'base1.html' %}
+{% set active_page = "garelly" %}
+{% block body %}
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<style>
+  html, body {
+  min-height: 100%;
+  }
+  body, div, form, input, select, p { 
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, Arial, sans-serif;
+  color: #eee;
+  }
+  p{
+    font-size: 16px;
+  }
+  body {
+  background: url("{{ url_for('static', filename='images/banner/app.jpg')}}") no-repeat;
+  background-size:cover;
+  }
+  h1, h2 {
+  text-transform: uppercase;
+  font-weight: 400;
+  color:white;
+  }
+  h2 {
+  margin: 0 0 0 8px;
+  }
+  .main-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.5); 
+  }
+  .left-part, form {
+  padding: 25px;
+  }
+  .left-part {
+  text-align: center;
+  }
+  .fa-graduation-cap {
+  font-size: 72px;
+  }
+  form {
+  background: rgba(61, 61, 61, 0.7); 
+  }
+  .title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  }
+  .info {
+  display: flex;
+  flex-direction: column;
+  }
+  input, select {
+  padding: 5px;
+  margin-bottom: 30px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #eee;
+  }
+  input::placeholder {
+  color: #eee;
+  }
+  option:focus {
+  border: none;
+  }
+  option {
+  background: black; 
+  border: none;
+  }
+  .checkbox input {
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  }
+  .checkbox a {
+  color: #26a9e0;
+  }
+  .checkbox a:hover {
+  color: #85d6de;
+  }
+  .btn-item, .myapplybutton {
+  padding: 10px 5px;
+  margin-top: 20px;
+  border-radius: 5px; 
+  border: none;
+  background: #26a9e0; 
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  }
+  .btn-item {
+  display: inline-block;
+  margin: 20px 5px 0;
+  }
+  .myapplybutton {
+  width: 100%;
+  }
+  .myapplybutton:hover, .btn-item:hover {
+  background: #85d6de;
+  }
+  @media (min-width: 568px) {
+  html, body {
+  height: 100%;
+  }
+  .main-block {
+  flex-direction: row;
+  height: calc(100% - 50px);
+  }
+  .left-part, form {
+  flex: 1;
+  height: auto;
+  }
+  }
+ 
+  
+</style>
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+    <div class="container" style="margin-top: 8%;">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="index.html">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Feedback</li>
+          </ul>
+          <p class="text-lighten mb-0">This page indicates or shows mainly how the students should submit the course feedback </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="w3-row-padding">
+   
+    <div class="main-block">
+      <div class="left-part">
+        <h1>Form of Course Feedback</h1>
+        <p>By filling this form will make it easier for you to submit your course feedback
+        <p>Please be carefull while filling this form </p>
+      </div>
+      <form action="/studfeed" method="post" enctype="multipart/form-data">
+        <div class="title">
+          <i class="fas fa-pencil-alt"></i> 
+          <h2>Fill this form to submit your feedback</h2>
+        </div>
+        <div class="info">
+          <input class="fname" type="text" name="name" placeholder="Your full name" id="name" required>
+           <input class="rname" type="text" name="rname" placeholder="Your roll Number" id="rname" require>
+          <select id="trimester" name="trimester" required>
+            <option value="" disabled selected>Semester</option>
+            <option value="one">1</option>
+            <option value="two">2</option>
+            <option value="three">3</option>
+            <option value="four">4</option>
+            <option value="five">5</option>
+            <option value="six">6</option>
+            <option value="seven">7</option>
+            <option value="eight">8</option> 
+          </select><br>
+          <select id="stream" name="stream" required>
+            <option value="" disabled selected>Course Stream</option>
+            <option value="cse">Computer Science and Engineering</option>
+            <option value="it">Information & Communication Technology</option>
+            <option value="ee">Electrical Engineering</option>
+            <option value="me">Mechanical Engineering</option>
+            <option value="ce">Civil Engineering</option>
+            <option value="pe">Petroleum Engineering</option>
+            <option value="ae">Automobile Engineering</option>
+            <option value="chem">Chemical Engineering</option>
+            <option value="ece">Electronics & Communication Engineering</option>
+            <option value="bio">Biotechnology</option>
+          </select><br>
+          <select id="sem7cse" name="sem7cse">
+          </select><br>
+          <label for="feedback">Type your course feedback below(max:200 words):</label>
+        <textarea id="feedback" name="feedback" rows="10" cols="60">
+        </textarea>
+        </div>
+        <button class="myapplybutton" type="submit">Submit</button>
+      </form>
+    </div> 
+  </div>
+  
+  <script>
+  var courseMapping = {
+    "":"Courses",
+    "ml": "Machine Learning",
+    "mllab": "Machine Learning Lab",
+    "df": "Digital Forensics",
+    "dflab": "Digital Forensics Lab",
+    "bt": "Block chain Technology",
+    "btlab": "Block chain Technology Lab",
+    "pr": "Pattern recognition",
+    "prlab": "Pattern recognition Lab",
+    "IT": "Internet of Things",
+    "ITlab": "Internet of Things Lab",
+
+    "ai": "Artificial Intelligent",
+    "ailab": "Artificial Intelligent Lab",
+    "awt": "Advanced Web Technology Lab",
+    "cs": "Cyber security",
+    "cslab": "Cyber security Lab",
+    "cc": "Cloud Computing",
+    "cclab": "Cloud Computing Lab",
+    "com": "Communication Skills",
+    "ind": "Industry 4.0",
+    "indlab": "Industry 4.0 Lab",
+
+    "cn": "Computer Network",
+    "cnlab":"Computer Network Lab",
+    "sscd":"System Software and Compiler Design",
+    "sscdlab":"System Software and Compiler Design Lab",
+    "se":"Software Engineering",
+    "is":"Information security",
+    "islab":"Information security Lab",
+    "wt":"Introduction to Web Technology",
+    "dm":"Data Mining",
+    "dmlab":"Data Mining Lab",
+
+    "soft":"Soft Skills",
+    "toc":"Theory of Computation",
+    "os":"Operating system",
+    "oslab":"Operating system Lab",
+    "dbms":"Database Management System",
+    "is":"Database Management System lab",
+    "daa":"Design and Analysis Algorithm",
+    "daalab":"Design and Analysis Algorithm lab",
+    "dp":"Design Pattern lab",
+    "commun":"Communication Skills",
+
+    "dts":"Data structures",
+    "dtslab":"Data structures Lab",
+    "mic":"Microprocessor Programming and Interfacing",
+    "miclab":"Microprocessor Programming and Interfacing Lab",
+    "dec":"Digital Electronics and Computer Organization",
+    "declab":"Digital Electronics and Computer Organization Lab",
+    "ooplab":"Object Oriented Programming with Java Lab",
+    "oop":"Object Oriented Programming with Java",
+    "aie":"Artificial Intelligent for Everyone",
+    "desc":"Descrete Mathematics structures",
+    "Civ":"Civic and Social Services Internship(CSSI)",
+
+    "NSS -II":"NSS -II",
+    "Engineering Chemistry":"Engineering Chemistry",
+    "Engineering Chemistry Lab" :"Engineering Chemistry Lab",
+    "Fundamentals of Python Programming":"Fundamentals of Python Programming",
+    "Communication Skills -I":"Communication Skills -I",
+    "Environmental Studies":"Environmental Studies ",
+    "Basic Electronics":"Basic Electronics",
+    "Basic Electronics Lab":"Basic Electronics Lab",
+    "Mathematics -II":"Mathematics -II",
+    "Engineering Graphics Lab":"Engineering Graphics Lab",
+    "Elements of Mechanical Engineering":"Elements of Mechanical Engineering",
+    "Elements of Mechanical Engineering Lab":"Elements of Mechanical Engineering Lab",
+
+    "Professional Ethics and Human Values":"Professional Ethics and Human Values",
+    "Workshop Practicek":"Workshop Practice",
+    "NSS -I":"NSS -I",
+    "Element of Civil Engineering and Solid Mechanics":"Element of Civil Engineering and Solid Mechanics",
+    "Element of Civil Engineering and Solid Mechanics Lab":"Element of Civil Engineering and Solid Mechanics Lab",
+    "Computer Programming with C":"Computer Programming with C",
+    "Computer Programming with C Lab":"Computer Programming with C Lab",
+    "Element of Electrical Engineering":"Element of Electrical Engineering",
+    "Element of Electrical Engineering Lab":"Element of Electrical Engineering Lab",
+    "Mathematics-1":"Mathematics-1",
+    "Engineering Physics":"Engineering Physics",
+    "Engineering Physics Lab":"Engineering Physics Lab",
+
+  };
+  function updateCourseOptions() {
+    var trimester = document.getElementById("trimester").value;
+    var stream = document.getElementById("stream").value;
+    var courseSelect = document.getElementById("sem7cse");
+  
+    courseSelect.innerHTML = "";
+    if (trimester === "seven" && stream === "cse") {
+      addOptions(courseSelect, [ "ml", "mllab", "df", "dflab", "bt", "btlab", "pr", "prlab", "IT", "ITlab"]);
+    } else if (trimester === "six" && stream === "cse") {
+      addOptions(courseSelect, ["ai", "ailab", "awt", "cs", "cslab", "cc", "cclab", "com", "ind", "indlab"]);
+    } 
+  
+   else if (trimester === "six" && stream === "cse") {
+    addOptions(courseSelect, ["ai", "ailab", "awt", "cs", "cslab", "cc", "cclab", "com", "ind", "indlab"]);
+   }
+   else if (trimester === "five" && stream === "cse") {
+    addOptions(courseSelect, [ "cn","cnlab","sscd","sscdlab","se","is","islab","wt","dm","dmlab"]);
+   }   
+   else if (trimester === "four" && stream === "cse") {
+    addOptions(courseSelect, ["soft", "toc","os", "oslab","dbms","is","daa","daalab","dp","commun"]);
+   }   
+   else if (trimester === "three" && stream === "cse") {
+    addOptions(courseSelect, [ "dts", "dtslab", "mic", "miclab", "dec", "declab", "ooplab", "oop", "aie", "desc", "Civ"]);
+   }   
+   else if (trimester === "two" && stream === "cse") {
+    addOptions(courseSelect, ["NSS -II",
+    "Engineering Chemistry",
+    "Engineering Chemistry Lab" ,
+    "Fundamentals of Python Programming",
+    "Communication Skills -I",
+    "Environmental Studies",
+    "Basic Electronics",
+    "Basic Electronics Lab",
+    "Mathematics -II",
+    "Engineering Graphics Lab",
+    "Elements of Mechanical Engineering",
+    "Elements of Mechanical Engineering Lab"]);
+   }   
+   else if (trimester === "one" && stream === "cse") {
+    addOptions(courseSelect, ["Professional Ethics and Human Values",
+    "Workshop Practicek",
+    "NSS -I",
+    "Element of Civil Engineering and Solid Mechanics",
+   "Element of Civil Engineering and Solid Mechanics Lab",
+    "Computer Programming with C",
+    "Computer Programming with C Lab",
+    "Element of Electrical Engineering",
+    "Element of Electrical Engineering Lab",
+    "Mathematics-1",
+    "Engineering Physics",
+    "Engineering Physics Lab"]);
+   }   
+    else {
+      addOptions(courseSelect, ["","ml", "mllab", "df", "dflab", "bt", "btlab", "pr", "prlab", "IT", "ITlab", "ai", "ailab", "awt", "cs", "cslab", "cc", "cclab", "com", "ind", "indlab",  "cn","cnlab","sscd","sscdlab","se","is","islab","wt","dm","dmlab", "soft", "toc","os", "oslab","dbms","is","daa","daalab","dp","commun", "dts", "dtslab", "mic", "miclab", "dec", "declab", "ooplab", "oop", "aie", "desc", "Civ", "NSS", "chem", "chemlab", "fp", "comski", "Envi", "Basic", "Basiclab", "Math2", "enggraph", "elemec","elemeclab", "profeth", "Work", "NSS-I", "ecesm", "ecesmlab", "cpc", "cpclab", "eee", "eeelab", "math-1", "ephy", "ephylab"]);
+    }
+  }
+  function addOptions(selectElement, optionsArray) {
+    optionsArray.forEach(function(option) {
+      var optionElement = document.createElement("option");
+      optionElement.value = option;
+      optionElement.text = courseMapping[option];
+      selectElement.appendChild(optionElement);
+    });
+  }
+  document.getElementById("trimester").addEventListener("change", updateCourseOptions);
+  document.getElementById("stream").addEventListener("change", updateCourseOptions);
+  updateCourseOptions();
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var maxWords = 200;
+    var minWords = 50;
+    var feedbackTextarea = document.getElementById("feedback");
+    var wordCountDisplay = document.createElement("div");
+    wordCountDisplay.textContent = "Words remaining: " + maxWords + ", Minimum words required: " + minWords;
+    feedbackTextarea.parentNode.insertBefore(wordCountDisplay, feedbackTextarea.nextSibling);
+    
+    feedbackTextarea.addEventListener("input", function() {
+        var words = this.value.trim().split(/\s+/).filter(function(word) {
+            return word.length > 0;
+        }).length;
+
+        if (words > maxWords) {
+            this.value = this.value.split(/\s+/).slice(0, maxWords).join(" ");
+            words = maxWords;
+        }
+
+        var remainingWords = maxWords - words;
+        var requiredWords = Math.max(0, minWords - words);
+
+        wordCountDisplay.textContent = "Words remaining: " + remainingWords + ", Minimum words required: " + requiredWords;
+    });
+});
+</script>
+
+
+
+
+  
+  {% endblock  %}

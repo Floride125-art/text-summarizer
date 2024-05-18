@@ -1,0 +1,141 @@
+{% extends 'base2.html' %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  {% block content %}
+  <body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item">
+              <a class="h2 text-primary font-secondary" >
+                Work Abroad updates</a>
+              </li>
+  
+          </ul>
+          <p class="text-lighten mb-0">This page for assistant who will be helping different aspirants to apply for different jobs abroad</p>
+          <p class="text-lighten mb-0">Below are some information of all aspirants who showed interest in applying to different companies so check out and apply for them.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <h2 style="margin-top: 2%; text-align: center;">information of aspirants who applied for work abroad</h2>
+  <div class="row" style="margin-bottom: 10%; margin-top: 2%;">
+    {% for work in works %}
+    <div class="col-md-4">
+      <div class="card h-100" id="card-{{ work.id }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ work.name }}</h5>
+          <p class="card-text">
+            <strong>Email:</strong> {{ work.mail }}<br>
+            <strong>Phone:</strong> {{ work.phone }}<br>
+            <strong>Job Applied For:</strong> {{ work.title }}<br>
+            <strong>Languages Spoken:</strong> {{ work.languages }}<br>
+            <strong>Country applied job to:</strong> {{ work.country }}<br>
+            <strong>Job Duration:</strong> {{ work.duration }}<br>
+            {% if work.cv %}
+              <strong>CV/Resume:</strong>
+              <a href="{{ url_for('download_docs', student_id=work.id, field='cv') }}">{{ work.cv_filename }}</a><br>
+            {% endif %}
+            {% if work.coverletter %}
+            <strong>Cover Letter:</strong>
+            <a href="{{ url_for('download_docs', student_id=work.id, field='coverletter') }}">{{ work.coverletter_filename }}</a><br>
+          {% endif %}
+          {% if work.picture %}
+          <strong>Your Picture:</strong>
+          <a href="{{ url_for('download_docs', student_id=work.id, field='picture') }}">{{ work.picture_filename }}</a><br>
+        {% endif %}
+    
+        <button class="btn btn-success btn-sm" id="done-btn-{{ work.id }}" onclick="showConfirmation('{{ work.id }}')">Done</button>
+          
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <script>
+    function showConfirmation(studentId) {
+      if (confirm('Are you sure you want to discard this card?')) {
+        fetch('/delete_cardi', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            student_id: studentId
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            console.log('Card deleted successfully');
+            removeCard(studentId);
+          } else {
+            console.error('Failed to delete card');
+          }
+        })
+        .catch(error => {
+          console.error('An error occurred while deleting card:', error);
+        });
+      }
+    }
+  
+    function removeCard(studentId) {
+      var cardId = 'card-' + studentId;
+      var card = document.getElementById(cardId);
+      card.remove();
+    }
+
+    const admissionForm = document.getElementById("admissionForm");
+  const showFormBtn = document.getElementById("showFormBtn");
+
+  admissionForm.style.display = "none";
+
+  showFormBtn.addEventListener("click", function() {
+    if (admissionForm.style.display === "none") {
+      admissionForm.style.display = "block";
+    } else {
+      admissionForm.style.display = "none";
+    }
+  });
+
+function toggleDescription(studentId) {
+        const description = document.getElementById("notes" + studentId);
+        const viewMoreBtn = document.getElementById("toggleButton" + studentId);
+
+        if (description.style.display === "none") {
+            description.style.display = "block";
+            viewMoreBtn.textContent = "Hide"; 
+        } else {
+            description.style.display = "none";
+            viewMoreBtn.textContent = "View More"; 
+        }
+    }
+
+
+    
+  </script>
+  
+  <style>
+    .card {
+      
+      margin-left: 10%;
+      margin-top: 10%;
+   
+    }
+    .hidden {
+    display: none;
+}
+    
+   
+ 
+
+  </style>
+  </body>
+ {%endblock%}   
+
+
+  

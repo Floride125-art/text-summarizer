@@ -1,0 +1,42 @@
+{% extends 'base1.html' %}
+{% set active_page = "about" %}
+{% block body %}
+
+ <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/andik.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8" style="margin-top: 10%;">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/">Home</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">About Us</li>
+        </ul>
+        <p class="text-lighten mb-0">The StudFeed Summarizer system is mainly made for connecting both students and faculties and allow them to be able to submit the student feedback </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /page title -->
+
+<!-- about -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <img class="img-fluid w-100 mb-4" src="{{ url_for('static', filename='images/events/him.jpg')}}" alt="about image">
+        <h2 class="section-title">ABOUT StudFeed Summarizer</h2>
+        <p>In the field of academics where we deal with a lot of courses, it is vital to get to know how student feel about the course and their faculties so as to know
+          where to make improvement and suggest what can be done on both sides. The amount of student feedback received is huge and having this system that summarizes those feedback is the best 
+          ways of extracting important ideas and short summaries.
+        </p>
+        <p>With this system is going to be easier for both students and faculties to be able to know how the student feel about the course
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /about -->
+
+<!-- success story -->
+
+
+{% endblock  %}

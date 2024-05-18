@@ -1,0 +1,20 @@
+{% extends 'base1.html' %}
+{% set active_page = "contact" %}
+{% block body %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/contact">Contact</a></li>
+          <li class="list-inline-item text-white h3 font-secondary nasted">Error in contact</li>
+        </ul>
+        <p class="text-lighten mb-0">Oops! There was an error in sending your information. Try again</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section pt-0">
+  <div id="map_canvas" data-latitude="-1.935114" data-longitude="30.082111"></div>
+</section>
+  {% endblock  %}

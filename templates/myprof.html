@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% set active_page = "profile" %}
+{% block content %}
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item text-white h3 font-secondary nasted">My Profile</li>
+        </ul>
+        <p class="text-lighten mb-0">This is section where you will get some of your personal information and details that you regisetred within this website</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+    <h1>{{ current_user.name }}</h1>
+    <hr style="width:50%; border-width: 5px; background-color: black;">
+    <p><b>Email Address:</b> {{ current_user.email }}</p>
+    <p><b>Phone Number:</b> {{ current_user.number }}</p>
+    <p><b>Role:</b> {{ current_user.role }} </p>
+    <td><a href="/edit/details/{{current_user.id}}"><button class="btn btn-primary">Edit</button></a></td>
+   
+    <h1>Application Details:</h1>
+    <hr style="width:50%; border-width: 5px; background-color: black;">
+    {% if application_data %}
+    <strong>Name:</strong> {{ application_data.name }} <br>
+    <strong>Date of Birth:</strong> {{ application_data.date_of_birth }} <br>
+    <strong>Sender Email:</strong> {{ application_data.senderemail }} <br>
+    <strong>Status Type:</strong> {{ application_data.statustype }} <br>
+    <strong>Email:</strong> {{ application_data.email }} <br>
+    <strong>Phone Number:</strong> {{ application_data.pnumber }} <br>
+    <strong>Address:</strong> {{ application_data.address }} <br>
+    <strong>Program Type:</strong> {{ application_data.program }} <br>
+    <strong>Highest Education Level:</strong> {{ application_data.education }} <br>
+    <strong>Gender:</strong> {{ application_data.gender }} <br>
+    <p></p>
+    <p><b>The Documents Sent</b></p>
+    <strong>O-level Certificate:</strong> {{ application_data.oleveldoc_filename }} <br>
+    <strong>A-level Certificate:</strong> {{ application_data.aleveldoc_filename }} <br>
+    <strong>Bachelor's Degree:</strong> {{ application_data.bachelor_filename }} <br>
+    <strong>Master's Degree:</strong> {{ application_data.masters_filename }} <br>
+    <strong>ID:</strong> {{ application_data.myid_filename }} <br>
+    <strong>Passport:</strong> {{ application_data.mypassport_filename }} <br>
+    <strong>CV:</strong> {{ application_data.mycv_filename }} <br>
+    <td><a href="/edit/application/{{application_data.id}}"><button class="btn btn-primary">Update</button></a></td>
+    <td><a href="/delete/details/{{application_data.id}}"><button class="btn btn-primary">Delete/Remove</button></a></td>
+    {% else %}
+    <p>No application submitted yet.</p>
+    {% endif %}
+    
+</section>
+
+<!-- /page title -->
+
+  {% endblock  %}

@@ -1,0 +1,66 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+    /* Center the form */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+  
+    /* Increase input and textarea size */
+   input{
+    width: 40%;
+
+   }
+   #subtitle{
+    width: 60%;
+
+   }
+    textarea {
+      width: 60%;
+      height: 150px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+  
+    button[type="submit"], button {
+      padding: 10px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  
+    button[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+<div>
+    
+    <p style="align-items: center; text-align: center; color: black;">This is a page for updating contact page</p>
+    <div class="col-lg-7 mb-4 mb-lg-0">
+        <form action="/edit/contact/{{id}}" method="POST">
+          <input type="text" class="form-control mb-3" id="name" name="name" value="{{post.name}}">
+          <input type="email" class="form-control mb-3" id="mail" name="mail" value="{{post.mail}}">
+          <input type="text" class="form-control mb-3" id="subject" name="subject" value="{{post.subject}}">
+          <textarea name="message" id="message" class="form-control mb-3"></textarea>
+          <button type="submit" value="send" class="btn btn-primary">UPDATE MESSAGE</button>
+        </form>
+      </div>
+     
+      
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+      $('#message').val('{{post.message}}');
+    });
+  </script>
+
+{% endblock %}

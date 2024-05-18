@@ -1,0 +1,149 @@
+{% extends 'ahabanza.html' %}
+{% block contentfluid %}
+<style>
+ 
+    img{
+      width: 100%;
+    }
+    .course-item {
+    height: 450px; 
+    overflow: auto; 
+  }
+  
+  .course-item .position-relative {
+    height: 200px; 
+  }
+  
+  .course-item .text-start,
+  .course-item .text-start {
+    height: calc(100% - 200px); 
+    padding: 20px; 
+  }
+  
+  .course-item h3 {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item p {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item .d-flex {
+    padding: 10px; 
+  }
+  
+  </style>
+<body>
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb mb-2">
+          <li class="list-inline-item">
+            <a class="h2 text-primary font-secondary" >
+              Added Places</a>
+            </li>
+
+        </ul>
+        
+    </div>
+  </div>
+</section>
+<div class="row" style=" margin-top: 2%;">
+    
+    {% for bookingz in bookingz %}
+    <div class="col-md-4" style="margin-bottom: 5%;">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="course-item bg-light" style="text-align: center;">
+          
+            <div class="position-relative overflow-hidden">
+                <img class="img-fluid" src="{{ url_for('bookings_image', bookings_id=bookingz.id) }}" alt="bookings Image" >
+            </div>
+                <h3 class="mb-0">{{ bookingz.title }}</h3>          
+                <p class="cost">{{ bookingz.price }}</p>
+                
+           
+                <div class="card-box" style="display: flex;">
+                    <p class="time" style="text-align: center;">🕓{{bookingz.days}}</p>
+                    <p class="location" style="text-align: center;">📍 {{bookingz.place}}</p>
+                </div>
+               
+                
+                
+                <button class="btn btn-primary btn-sm"  style="margin-top: 3%; margin-bottom:3%; border-radius: 5px;"><a href="/bookingsadd" style="text-decoration: none; color: white;">Book Now</a></button>
+                <p class="cost" id="description{{ bookingz.id }}" style="display: none;">{{ bookingz.description }}</p>
+                <button class="btn btn-primary btn-sm" style="margin-top: 3%; margin-bottom:3%; border-radius: 5px;"onclick="toggleDescription({{ bookingz.id }})">View More</button>
+                <button class="btn btn-primary btn-sm"onclick="" style="margin-bottom: 2%; border-radius: 5px;"><a href="/edit/places/{{bookingz.id}}" style="color: white; text-decoration: none;">Update</button></a>
+                <button class="btn btn-primary btn-sm"onclick="" style="border-radius: 5px;"><a href="/delete/places/{{bookingz.id}}" style="color: white; text-decoration: none;">Delete/Remove</a></button>
+               
+           
+        </div>
+         
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <script>
+   
+     function validateForm() {
+         const place = document.getElementById("place").value;
+         const email = document.getElementById("email").value;
+         const phone = document.getElementById("phone").value;
+         const date = new Date(document.getElementById("date").value);
+ 
+         // Check if any field is empty
+         if (!place || !email || !phone || !date) {
+             alert("Please fill in all fields.");
+             return false;
+         }
+ 
+         // Email validation
+         if (!isValidEmail(email)) {
+             alert("Please enter a valid email address.");
+             return false;
+         }
+ 
+         // Phone number validation
+         if (!isValidPhoneNumber(phone)) {
+             alert("Please enter a valid phone number.");
+             return false;
+         }
+ 
+         // Check if the date is set for a future date
+         const today = new Date();
+         today.setHours(0, 0, 0, 0); 
+         if (date < today) {
+             alert("Please choose a future date.");
+             return false;
+         }
+         document.getElementById("form1").submit();
+     }
+ 
+     function isValidEmail(email) {
+         const emailRegex = /^\S+@\S+\.\S+$/;
+         return emailRegex.test(email);
+     }
+ 
+     function isValidPhoneNumber(phone) {
+         const phoneRegex = /^\d{10}$/; // Assumes a 10-digit phone number format
+         return phoneRegex.test(phone);
+     }
+     function toggleDescription(bookingId) {
+         const description = document.getElementById("description" + bookingId);
+         const viewMoreBtn = document.getElementById("toggleButton" + bookingId);
+ 
+         if (description.style.display === "none") {
+             description.style.display = "block"; 
+             viewMoreBtn.textContent = "Hide"; 
+         } else {
+             description.style.display = "none"; 
+             viewMoreBtn.textContent = "View More"; 
+         }
+     }
+ 
+   </script>
+</body>
+{% endblock %}

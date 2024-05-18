@@ -1,0 +1,31 @@
+{% extends 'base2.html' %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  {% block content %}
+  <body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/backgrounds/page-title.jpg')}}">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item">
+              <a class="h2 text-primary font-secondary" >
+                Admission letter uploaded/a>
+              </li>
+  
+          </ul>
+          <p class="text-lighten mb-0">Oh sorry! There was an error in uploading the admission</p>
+          <p class="text-lighten mb-0">Double check if you haven't selected file to upload then upload it.</p>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </body>
+ {%endblock%}   
+
+
+  

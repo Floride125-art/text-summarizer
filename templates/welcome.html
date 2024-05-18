@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+{% set active_page = "Student" %}
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<style>
+  html, body {
+  min-height: 100%;
+  }
+  body, div, form, input, select, p { 
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, Arial, sans-serif;
+  color: #eee;
+  }
+  p{
+    font-size: 16px;
+  }
+  body {
+  background: url("{{ url_for('static', filename='images/banner/app.jpg')}}") no-repeat;
+  background-size:cover;
+  }
+  h1, h2 {
+  text-transform: uppercase;
+  font-weight: 400;
+  color:white;
+  }
+  h2 {
+  margin: 0 0 0 8px;
+  }
+  .main-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.5); 
+  }
+  .left-part, form {
+  padding: 25px;
+  }
+  .left-part {
+  text-align: center;
+  }
+  .fa-graduation-cap {
+  font-size: 72px;
+  }
+  form {
+  background: rgba(61, 61, 61, 0.7); 
+  }
+  .title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  }
+  .info {
+  display: flex;
+  flex-direction: column;
+  }
+  input, select {
+  padding: 5px;
+  margin-bottom: 30px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #eee;
+  }
+  input::placeholder {
+  color: #eee;
+  }
+  option:focus {
+  border: none;
+  }
+  option {
+  background: black; 
+  border: none;
+  }
+  .checkbox input {
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  }
+  .checkbox a {
+  color: #26a9e0;
+  }
+  .checkbox a:hover {
+  color: #85d6de;
+  }
+  .btn-item, .myapplybutton {
+  padding: 10px 5px;
+  margin-top: 20px;
+  border-radius: 5px; 
+  border: none;
+  background: #26a9e0; 
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  color: #fff;
+  }
+  .btn-item {
+  display: inline-block;
+  margin: 20px 5px 0;
+  }
+  .myapplybutton {
+  width: 100%;
+  }
+  .myapplybutton:hover, .btn-item:hover {
+  background: #85d6de;
+  }
+  @media (min-width: 568px) {
+  html, body {
+  height: 100%;
+  }
+  .main-block {
+  flex-direction: row;
+  height: calc(100% - 50px);
+  }
+  .left-part, form {
+  flex: 1;
+  height: auto;
+  }
+  }
+ 
+  
+</style>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/banner/baloons.jpeg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          
+          <p class="text-lighten mb-0">Dear {{ current_user.name }}, welcome to your student portal page. This is your personal student portal and all you have to do is to fill the form below for submiting all needed information so that we can apply for you on different universities. </p>
+          <p class="text-lighten mb-0">Like we promisedyou, everything is covered with so many study opportunities, so after filling up the form you will receive your admission in few days</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end retrieving -->
+</div>
+  <div class="main-block">
+    <div class="left-part">
+      <i class="fas fa-graduation-cap"></i>
+      <h1>Register to get admission</h1>
+      <p>ME consultancy here to make you dreams come true. Fill that form and be ready to get admission in your dream university</p>
+      <p>Any difficulties while filling the form,<br> please call us on +9173642608</p>
+     
+    </div>
+    <form action="/welcome" method="post" enctype="multipart/form-data">
+      <div class="title">
+        <i class="fas fa-pencil-alt"></i> 
+        <h2>Register here</h2>
+      </div>
+      <div class="info">
+        <input class="fname" type="text" name="name" placeholder="Full name" id="name">
+        <label>Date of Birth:</label>
+        <input type="date" id="date_of_birth" name="date_of_birth"  required>
+       
+        <select id="senderemail" name="senderemail" required>
+          <option value="" disabled selected>Sender email</option>
+          <option value="{{ current_user.email }}">{{ current_user.email }}</option>
+          
+        </select><br>
+        <select id="statustype" name="statustype" required>
+          <option value="" disabled selected>Select status type</option>
+          <option value="student">Student</option>
+          <option value="agent">Agent</option>
+        </select><br>
+        <input type="email" name="email" placeholder="Email" id="email">
+        <input type="text" name="pnumber" placeholder="Phone number" id="pnumber">
+        <input type="text" name="address" placeholder="Address(Country, City, Province)" id="address">
+        <select id="program" name="program" required>
+          <option value="" disabled selected>Program type</option>
+          <option value="short-courses">Short courses</option>
+          <option value="featured-courses">Featured courses</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="diploma">Diploma</option>
+          <option value="masters-degree">Masters degree</option>
+          <option value="postgraduate">Postgraduate</option>
+        </select>
+        <select id="education" name="education" required>
+          <option value="" disabled selected>Highest level of education*</option>
+          <option value="short-courses">High School</option>
+          <option value="diploma">Diploma</option>
+          <option value="undergraduate">Undergraduate</option>
+          <option value="masters-degree">Masters degree</option>
+          <option value="postgraduate">Postgraduate</option>
+        </select>
+        <select id="gender" name="gender" required>
+          <option value="" disabled selected>Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select><br>
+        <p style="text-align: center;">For the following section, please make sure to upload all neccessary documents you have as required</p>
+        <label for="document">Your O-level certificate:</label>
+        <input type="file" id="oleveldoc" name="oleveldoc" accept=".pdf,.doc,.docx">
+        <label for="document">Your A-level certificate:</label>
+        <input type="file" id="aleveldoc" name="aleveldoc" accept=".pdf,.doc,.docx" />
+        <label for="document">Your Bachelor's Degree:</label>
+        <input type="file" id="bachelor" name="bachelor" accept=".pdf,.doc,.docx" />
+        <label for="document">Your Master's Degree:</label>
+        <input type="file" id="masters" name="masters" accept=".pdf,.doc,.docx" />
+        <label for="document">Your ID:</label>
+        <input type="file" id="myid" name="myid" accept=".pdf,.doc,.docx" />
+        <label for="document">Your passport:</label>
+        <input type="file" id="mypassport" name="mypassport" accept=".pdf,.doc,.docx" />
+        <label for="document">Your CV(only for masters and phd applicants):</label>
+        <input type="file" id="mycv" name="mycv" accept=".pdf,.doc,.docx" />
+        
+      </div>
+      <div class="checkbox">
+        <input type="checkbox" name="checkbox"><span>I agree to the <a href="">Privacy Policy for ME consultancy.</a></span>
+      </div>
+      <button class="myapplybutton" type="submit" href="/welcome">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}

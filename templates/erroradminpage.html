@@ -1,0 +1,53 @@
+{% extends 'base1.html' %}
+{% set active_page = "injira" %}
+ {% block body %}
+ <style>
+  body{
+    background-color: #1A2933;
+  }
+.form-container {
+  background-color: #1A2933;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+#moncontainer{
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.password-container {
+  position: relative;
+}
+
+/* Styles for the password toggle button */
+#password-toggle {
+ 
+  background: none;
+  margin-left: -8%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+
+
+</style>
+<body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/banner/mepics.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8" style="margin-top: 10%;">
+         
+          <p class="text-lighten mb-0">Oops! There was an error in your login credentials.Your username or password is Wrong, <a href="/injira">try again </a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+ {%endblock%}  
+  
+</body>
+</html>

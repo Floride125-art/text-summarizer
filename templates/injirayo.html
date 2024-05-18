@@ -1,0 +1,111 @@
+{% extends 'base1.html' %}
+{% set active_page = "injira" %}
+ {% block body %}
+ <style>
+  body{
+    background-color: #1A2933;
+  }
+.form-container {
+  background-color: #1A2933;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+}
+#moncontainer{
+  margin-top: 10%;
+  margin-bottom: 10%;
+ 
+}
+.password-container {
+  position: relative;
+}
+#password-toggle {
+  background: none;
+  margin-left: -8%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 18px;
+  color: #3a3a3a;
+}
+</style>
+<body>
+  <section class="page-title-section overlay" data-background="{{ url_for('static', filename='images/events/analyzepc.jpg')}}" style="background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8" style="margin-top: 10%;">
+          <ul class="list-inline custom-breadcrumb mb-2">
+            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="/">Home</a></li>
+            <li class="list-inline-item text-white h3 font-secondary nasted">Login</li>
+          </ul>
+          <p class="text-lighten mb-0">This is your login page for the Faculty for those who are able to give or deliver the course</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ <center> <div class="container" id="moncontainer">
+    <div class="form-container" >
+      <form id="login-form" class="form" action="/injirayo" method="post">
+        {{ form.hidden_tag() }}
+        
+        <center><h2 class="logheader" style="color:white;">Login</h2></center>
+        <center><p class="logheader" style="color:white;">Enter your email address if your are Faculty to login</p></center>
+        <center> <p style="color:white" class="myinput">
+            {{ form.email.label }} :<br>
+            {{ form.email(size=20,placeholder="Your Email") }}<br>
+            {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p></center>
+       
+        <center><p class="button" style="font-size: 20px" id ="login-form" class="button" style="font-size: 25px;color:black bold;">{{ form.submit()}}</p></center>
+       
+       
+      </form>
+    </div>
+  </div></center>
+  <script>
+  
+    document.getElementById('login-form').addEventListener('submit', function (event) {
+        event.preventDefault(); 
+        const formData = new FormData(event.target);
+        fetch('/injirayo', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json()) 
+        .then(data => {
+          
+            if (data.status === 'success') {
+                window.alert(data.message);
+               
+                window.location.href = '/coursesview';
+            } else {
+                window.alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            window.alert('An error occurred during login.');
+        });
+    });
+
+    function togglePasswordVisibility() {
+    const passwordField = document.getElementById("password-field");
+    const passwordToggle = document.getElementById("password-toggle");
+  
+    if (passwordField.type === "password") {
+      passwordField.type = "text";
+      passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    } else {
+      passwordField.type = "password";
+      passwordToggle.innerHTML = '<i class="fas fa-eye"></i>';
+    }
+  }
+  
+</script>
+ {%endblock%}  
+  
+</body>
+</html>

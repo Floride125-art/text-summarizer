@@ -1,0 +1,223 @@
+{% extends 'base1.html' %}
+{% set active_page = "visit" %}
+{% block body %}
+<style>
+ 
+    img{
+      width: 100%;
+    }
+    .course-item {
+    height: 450px; 
+    overflow: auto; 
+  }
+  
+  .course-item .position-relative {
+    height: 200px; 
+  }
+  
+  .course-item .text-start,
+  .course-item .text-start {
+    height: calc(100% - 200px); 
+    padding: 20px; 
+  }
+  
+  .course-item h3 {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item p {
+    margin-bottom: 10px; 
+  }
+  
+  .course-item .d-flex {
+    padding: 10px; 
+  }
+  
+  </style>
+<section class="banner" id="home">
+    <div class="banner-text-item"  style="margin-top: 15%;">
+        <div class="banner-heading">
+            <h1>Book your Next tour!</h1>
+        </div>
+        <form class="form" id="form1">
+            <input type="text" list="mylist" placeholder="Where would you like to go?" id="place" name="place" required>
+            <datalist id="mylist">
+                <option>Kibuye</option>
+                <option>Rubavu</option>
+                <option>Nyungwe</option>
+                <option>Akagera</option>
+                <option>Muhazi</option>
+                <option>Birunga</option>
+                <option>Huye/iBwami</option>
+            </datalist>
+            <input type="date" class="date" id="date" name="date" required>
+           <button class="btn btn-primary" style="border-radius: 5px;" type="submit" onclick="copyData()"><a data-toggle="modal" data-target="#bookModal">book</a></button>
+        </form>
+    </div>
+</section>
+<!-- modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content rounded-0 border-0 p-4">
+          <div class="modal-header border-0">
+              <h3>Book for a Visit</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="login">
+                  <form action="/compose_email" class="row" method="POST" enctype="multipart/form-data">
+                      <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Full Name">
+                      </div>
+                      <div class="col-12">
+                          <input type="phone" class="form-control mb-3" id="phone" name="phone" placeholder="Phone">
+                      </div>
+                      <div class="col-12">
+                          <input type="email" class="form-control mb-3" id="email" name="email" placeholder="Email">
+                      </div>
+                      <div class="col-12">
+                          <input type="text" class="form-control mb-3" id="place2" name="place2">
+                      </div>
+                      <div class="col-12">
+                        <input type="date" class="form-control mb-3" id="date2" name="date2" >
+                    </div>
+                      <div class="col-12">
+                          <button type="submit" class="btn btn-primary">Book Now</button>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<h1 style="text-align: center;  margin-top: 2%;">Different Places to Visit</h1>
+
+<div class="row" style=" margin-top: 2%;">
+    {% for bookingz in bookingz %}
+    <div class="col-md-4" style="margin-bottom: 5%;">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="course-item bg-light" style="text-align: center;">
+          
+            <div class="position-relative overflow-hidden">
+                <img class="img-fluid" src="{{ url_for('bookings_image', bookings_id=bookingz.id) }}" alt="bookings Image" >
+            </div>
+                <h3 class="mb-0">{{ bookingz.title }}</h3>          
+                <p class="cost">{{ bookingz.price }}</p>
+                
+           
+                <div class="card-box" style="display: flex;">
+                    <p class="time" style="text-align: center;">🕓{{bookingz.days}}</p>
+                    <p class="location" style="text-align: center;">📍 {{bookingz.place}}</p>
+                </div>
+               
+                
+                
+                <button class="btn btn-primary btn-sm" style="margin-top: 3%; margin-bottom:3%; border-radius: 5px;"><a href="#home" style="text-decoration: none;">Book Now</a></button>
+                <p class="cost" id="description{{ bookingz.id }}" style="display: none;">{{ bookingz.description }}</p>
+                <button class="btn btn-primary btn-sm" style="margin-top: 3%; margin-bottom:3%; border-radius: 5px;"onclick="toggleDescription({{ bookingz.id }})">View More</button>
+               
+           
+        </div>
+         
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+
+
+<script>
+   function copyData() {
+  const place = document.getElementById('place');
+  const date = document.getElementById('date');
+  const placeToCopy = place.value;
+  const dateToCopy = date.value;
+
+  const placeField = document.getElementById('place2');
+  const dateField = document.getElementById('date2');
+  placeField.value = placeToCopy;
+  dateField.value = dateToCopy;
+
+  const places = document.getElementById("place").value;
+  const dates = new Date(document.getElementById("date").value);
+
+        
+        if (!places || !dates) {
+            alert("Please fill in all fields.");
+            return false;
+        }
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+        if (dates < today) {
+            alert("Please choose a future date.");
+            return false;
+        }
+
+      
+    
+   }
+    function validateForm() {
+        const place = document.getElementById("place").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const date = new Date(document.getElementById("date").value);
+
+        
+        if (!place || !email || !phone || !date) {
+            alert("Please fill in all fields.");
+            return false;
+        }
+
+        if (!isValidEmail(email)) {
+            alert("Please enter a valid email address.");
+            return false;
+        }
+
+        
+        if (!isValidPhoneNumber(phone)) {
+            alert("Please enter a valid phone number.");
+            return false;
+        }
+
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); 
+        if (date < today) {
+            alert("Please choose a future date.");
+            return false;
+        }
+
+        
+        document.getElementById("form1").submit();
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^\S+@\S+\.\S+$/;
+        return emailRegex.test(email);
+    }
+
+    function isValidPhoneNumber(phone) {
+        const phoneRegex = /^\d{10}$/; 
+        return phoneRegex.test(phone);
+    }
+    function toggleDescription(bookingId) {
+        const description = document.getElementById("description" + bookingId);
+        const viewMoreBtn = document.getElementById("toggleButton" + bookingId);
+
+        if (description.style.display === "none") {
+            description.style.display = "block"; 
+            viewMoreBtn.textContent = "Hide"; 
+        } else {
+            description.style.display = "none"; 
+            viewMoreBtn.textContent = "View More"; 
+        }
+    }
+
+  </script>
+  
+{% endblock  %}
